@@ -1,7 +1,7 @@
 package com.Ecommerce.EcommerceApp.Controllers;
 
 
-import java.util.UUID;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
@@ -31,8 +32,13 @@ public class ProductController {
     
 
     @GetMapping
-    public ResponseEntity<ProductResponseDto> getProducts() {
-        ProductResponseDto productDtoList = productService.getAllProducts();
+    public ResponseEntity<ProductResponseDto> getProducts(
+        @RequestParam(name = "pageNumber", defaultValue = "0", required=false) Integer pageNumber,
+        @RequestParam(name = "pageSize", defaultValue = "10", required=false) Integer pageSize,
+        @RequestParam(name = "sortBy", defaultValue = "name", required=false) String sortBy,
+        @RequestParam(name = "sortOrder", defaultValue = "asc", required=false) String sortOrder
+    ) {
+        ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
         
        
         return new ResponseEntity<>(productDtoList, HttpStatus.OK); 
@@ -40,7 +46,7 @@ public class ProductController {
     }
 
      @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProducts(@PathVariable UUID id) {
+    public ResponseEntity<ProductDto> getProducts(@PathVariable Long id) {
         ProductDto productDto = productService.getProduct(id);
         
      
@@ -58,7 +64,7 @@ public class ProductController {
     }
 
          @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable UUID id, @RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         ProductDto updatedProductDto = productService.updateProduct(id, productDto);
         
         
@@ -67,7 +73,7 @@ public class ProductController {
     }
 
       @DeleteMapping("/{id}")
-    public ResponseEntity<ProductDto> deleteProduct(@PathVariable UUID id) {
+    public ResponseEntity<ProductDto> deleteProduct(@PathVariable Long id) {
         ProductDto deletedProductDto = productService.deleteProduct(id);
         
         

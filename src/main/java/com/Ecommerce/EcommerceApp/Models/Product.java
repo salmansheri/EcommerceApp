@@ -1,7 +1,7 @@
 package com.Ecommerce.EcommerceApp.Models;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,12 +25,13 @@ import lombok.NoArgsConstructor;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String name;
     private String description;
     private Integer quantity;
     private Double price;
     private Double specialPrice;
+    private String imageUrl; 
 
     @ManyToOne
     @JoinColumn(name = "category_id")

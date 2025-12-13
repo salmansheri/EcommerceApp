@@ -1,7 +1,6 @@
 package com.Ecommerce.EcommerceApp.Services;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,8 +11,9 @@ import org.springframework.stereotype.Service;
 import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
 import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
 import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
+import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
 import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
-import com.Ecommerce.EcommerceApp.Mappers.ProducttMapper;
+import com.Ecommerce.EcommerceApp.Mappers.ProductMapper;
 import com.Ecommerce.EcommerceApp.Models.Product;
 import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
 
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ProducttMapper producttMapper;
+    private final ProductMapper productMapper;
 
     @Override
     public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
         if (products.isEmpty() || products.size() == 0)
             throw new ApiException("No Product created till now");
 
-        List<ProductDto> productDtoList = producttMapper.toDto(products);
+        List<ProductDto> productDtoList = productMapper.toDto(products);
         return new ProductResponseDto(
                 productDtoList,
                 productPage.getNumber(),
@@ -52,27 +52,44 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProduct(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProduct'");
+    public ProductDto getProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+
+        return productMapper.toDto(product);
     }
 
     @Override
     public ProductDto saveProduct(ProductDto productDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveProduct'");
+        Product product = productMapper.toEntity(productDto);
+
+        Product savedProduct = productRepository.save(product);
+
+        return productMapper.toDto(savedProduct);
     }
 
     @Override
-    public ProductDto updateProduct(UUID id, ProductDto productDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateProduct'");
+    public ProductDto updateProduct(Long id, ProductDto productDto) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+
+        productMapper.updateProductFromDto(productDto, existingProduct);
+
+        Product updatedProduct = productRepository.save(existingProduct);
+
+        return productMapper.toDto(updatedProduct);
+
     }
 
     @Override
-    public ProductDto deleteProduct(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteProduct'");
+    public ProductDto deleteProduct(Long id) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+
+        productRepository.delete(existingProduct);
+
+        return productMapper.toDto(existingProduct);
+
     }
 
 }

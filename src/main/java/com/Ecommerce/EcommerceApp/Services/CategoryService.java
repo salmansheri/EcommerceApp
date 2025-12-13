@@ -1,9 +1,6 @@
 package com.Ecommerce.EcommerceApp.Services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -100,7 +97,7 @@ public class CategoryService implements ICategoryService {
         Category existingCategory = categoryRepo.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "Id", categoryId));
 
-        updatedCategoryDto.setId(categoryId);
+        // updatedCategoryDto.setId(categoryId);
 
         categoryMapper.updateCategoryFromDto(updatedCategoryDto, existingCategory);
 

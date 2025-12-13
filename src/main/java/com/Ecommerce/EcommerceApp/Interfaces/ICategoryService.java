@@ -1,6 +1,5 @@
 package com.Ecommerce.EcommerceApp.Interfaces;
 
-import java.util.List;
 
 import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
 import com.Ecommerce.EcommerceApp.Dtos.CategoryResponseDto;

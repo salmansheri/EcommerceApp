@@ -23,7 +23,7 @@ import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/product")
+@RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService; 
@@ -31,7 +31,7 @@ public class ProductController {
 
     
 
-    @GetMapping
+    @GetMapping("/public")
     public ResponseEntity<ProductResponseDto> getProducts(
         @RequestParam(name = "pageNumber", defaultValue = "0", required=false) Integer pageNumber,
         @RequestParam(name = "pageSize", defaultValue = "10", required=false) Integer pageSize,
@@ -54,12 +54,12 @@ public class ProductController {
 
     }
 
-     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
-        ProductDto savedProductDto = productService.saveProduct(productDto);
+     @PostMapping("/admin/categories/{categoryId}")
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+        ProductDto savedProductDto = productService.saveProduct(productDto, categoryId);
         
         
-        return new ResponseEntity<>(savedProductDto, HttpStatus.OK); 
+        return new ResponseEntity<>(savedProductDto, HttpStatus.CREATED); 
 
     }
 

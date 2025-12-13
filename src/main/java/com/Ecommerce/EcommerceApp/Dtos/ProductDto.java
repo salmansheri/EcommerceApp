@@ -24,8 +24,10 @@ public class ProductDto {
     private Integer quantity;
     private Double price;
     private Double specialPrice;
-    private String imageUrl; 
+    private String imageUrl;
+    private Double discount; 
+    
 
-    private Category category;
+    // private Category category;
 
 }

@@ -14,7 +14,9 @@ import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
 import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
 import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
 import com.Ecommerce.EcommerceApp.Mappers.ProductMapper;
+import com.Ecommerce.EcommerceApp.Models.Category;
 import com.Ecommerce.EcommerceApp.Models.Product;
+import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
 import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ICategoryRepository categoryRepository; 
 
     @Override
     public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
@@ -60,8 +63,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto saveProduct(ProductDto productDto) {
+    public ProductDto saveProduct(ProductDto productDto, Long categoryId) {
         Product product = productMapper.toEntity(productDto);
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+
+        product.setCategory(category);
+        product.setImageUrl("something.png");
+
+        Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0; 
+
+        Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
+        product.setSpecialPrice(specialPrice);
+
+
 
         Product savedProduct = productRepository.save(product);
 

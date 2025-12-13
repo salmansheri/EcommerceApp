@@ -10,7 +10,7 @@ public interface ProductService {
 
     ProductDto getProduct(Long id);
 
-    ProductDto saveProduct(ProductDto productDto);
+    ProductDto saveProduct(ProductDto productDto, Long categoryId);
 
     ProductDto updateProduct(Long id, ProductDto productDto);
 

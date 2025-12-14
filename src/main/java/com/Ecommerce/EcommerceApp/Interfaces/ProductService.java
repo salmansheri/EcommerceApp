@@ -2,6 +2,11 @@ package com.Ecommerce.EcommerceApp.Interfaces;
 
 
 
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
 import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
 
@@ -15,5 +20,10 @@ public interface ProductService {
     ProductDto updateProduct(Long id, ProductDto productDto);
 
     ProductDto deleteProduct(Long id);
+
+    List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder); 
+    List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
+    
+    ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException; 
 
 }

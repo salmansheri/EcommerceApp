@@ -20,6 +20,13 @@ import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Implementation of the ICategoryService interface for managing category
+ * operations.
+ * This service handles CRUD operations for categories, including pagination and
+ * validation.
+ */
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService implements ICategoryService {
@@ -30,9 +37,11 @@ public class CategoryService implements ICategoryService {
 
     private final CategoryMapper categoryMapper;
 
+    
     @Override
     public CategoryResponseDto getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
-        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending(); 
+        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 
         Page<Category> categoryPage = categoryRepo.findAll(pageDetails);

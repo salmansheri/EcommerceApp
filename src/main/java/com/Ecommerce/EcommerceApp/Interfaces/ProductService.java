@@ -1,7 +1,5 @@
 package com.Ecommerce.EcommerceApp.Interfaces;
 
-
-
 import java.io.IOException;
 import java.util.List;
 
@@ -21,9 +19,12 @@ public interface ProductService {
 
     ProductDto deleteProduct(Long id);
 
-    List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder); 
-    List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
-    
-    ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException; 
+    ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
+            String sortOrder);
+
+    ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+            String sortOrder);
+
+    ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException;
 
 }

@@ -52,32 +52,33 @@ public class ProductController {
     }
 
     @GetMapping("/public/categories/{categoryId}")
-    public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable Long categoryId,
+    public ResponseEntity<ProductResponseDto> getProductsByCategory(@PathVariable Long categoryId,
             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
             @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
 
     ) {
-        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy,
+        ProductResponseDto productResponse = productService.getProductsByCategory(categoryId, pageNumber, pageSize,
+                sortBy,
                 sortOrder);
 
-        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
 
     }
 
-    @GetMapping("/public/keyword/{keyword}")
-    public ResponseEntity<List<ProductDto>> getProductsByKeyword(@PathVariable String keyword,
+    @GetMapping("/public/search")
+    public ResponseEntity<ProductResponseDto> getProductsByKeyword(@RequestParam String keyword,
             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
             @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
 
     ) {
-        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
+        ProductResponseDto productResponse = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
                 sortOrder);
 
-        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
 
     }
 

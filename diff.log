@@ -1,693 +1,859 @@
 diff --git a/diff.log b/diff.log
-index 644b564..e69de29 100644
+index fe210ef..e69de29 100644
 --- a/diff.log
 +++ b/diff.log
-@@ -1,675 +0,0 @@
+@@ -1,693 +0,0 @@
 -diff --git a/diff.log b/diff.log
--index 4f0d2dc..e69de29 100644
+-index 644b564..e69de29 100644
 ---- a/diff.log
 -+++ b/diff.log
--@@ -1,510 +0,0 @@
---diff --git a/pom.xml b/pom.xml
---index 4a6af91..2b5130f 100644
------ a/pom.xml
---+++ b/pom.xml
---@@ -1,7 +1,9 @@
----<?xml version="1.0" encoding="UTF-8"?>
----<project xmlns="http://maven.apache.org/POM/4.0.0"
----	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
----	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
---+<?xml version="1.0" encoding="UTF-8" ?>
---+<project
---+    xmlns="http://maven.apache.org/POM/4.0.0"
---+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
---+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
---+>
--- 	<modelVersion>4.0.0</modelVersion>
--- 	<parent>
--- 		<groupId>org.springframework.boot</groupId>
---@@ -40,7 +42,7 @@
--- 			<groupId>org.springframework.boot</groupId>
--- 			<artifactId>spring-boot-starter-webmvc</artifactId>
--- 		</dependency>
----		
---+
--- 
--- 		<dependency>
--- 			<groupId>org.springframework.boot</groupId>
---@@ -95,55 +97,41 @@
--- 	</dependencies>
--- 
--- 	<build>
----		<plugins>
---+    <plugins>
---+        <plugin>
---+            <groupId>org.springframework.boot</groupId>
---+            <artifactId>spring-boot-maven-plugin</artifactId>
---+            <configuration>
---+                <excludes>
---+                    <exclude>
---+                        <groupId>org.projectlombok</groupId>
---+                        <artifactId>lombok</artifactId>
---+                    </exclude>
---+                </excludes>
---+            </configuration>
---+        </plugin>
--- 
----			<plugin>
----				<groupId>org.springframework.boot</groupId>
----				<artifactId>spring-boot-maven-plugin</artifactId>
----				<configuration>
----					<excludes>
----						<exclude>
----							<groupId>org.projectlombok</groupId>
----							<artifactId>lombok</artifactId>
----						</exclude>
----					</excludes>
----				</configuration>
----			</plugin>
----			<plugin>
----				<groupId>org.apache.maven.plugins</groupId>
----				<artifactId>maven-compiler-plugin</artifactId>
----				<version>3.8.1</version>
----				<configuration>
----					<source>17</source> <!-- depending on your project -->
----					<target>17</target> <!-- depending on your project -->
----					<annotationProcessorPaths>
----						<path>
----							<groupId>org.projectlombok</groupId>
----							<artifactId>lombok</artifactId>
----							<version>1.18.30</version>
----						</path>
----						<path>
----							<groupId>org.mapstruct</groupId>
----							<artifactId>mapstruct-processor</artifactId>
----							<version>${org.mapstruct.version}</version>
----						</path>
----						<!-- other annotation processors -->
----					</annotationProcessorPaths>
----				</configuration>
----			</plugin>
----			<plugin>
----				<groupId>org.springframework.boot</groupId>
----				<artifactId>spring-boot-maven-plugin</artifactId>
----				<configuration>
----					<excludes>
----						<exclude>
----							<groupId>org.projectlombok</groupId>
----							<artifactId>lombok</artifactId>
----						</exclude>
----					</excludes>
----				</configuration>
----			</plugin>
----		</plugins>
----	</build>
---+        <plugin>
---+            <groupId>org.apache.maven.plugins</groupId>
---+            <artifactId>maven-compiler-plugin</artifactId>
---+            <version>3.13.0</version> <configuration>
---+                <source>25</source>
---+                <target>25</target>
---+                <annotationProcessorPaths>
---+                    <path>
---+                        <groupId>org.projectlombok</groupId>
---+                        <artifactId>lombok</artifactId>
---+                        <version>1.18.36</version>
---+                    </path>
---+                    <path>
---+                        <groupId>org.mapstruct</groupId>
---+                        <artifactId>mapstruct-processor</artifactId>
---+                        <version>${org.mapstruct.version}</version>
---+                    </path>
---+                </annotationProcessorPaths>
---+            </configuration>
---+        </plugin>
---+    </plugins>
---+</build>
--- 
----</project>
---\ No newline at end of file
---+</project>
+-@@ -1,675 +0,0 @@
+--diff --git a/diff.log b/diff.log
+--index 4f0d2dc..e69de29 100644
+----- a/diff.log
+--+++ b/diff.log
+--@@ -1,510 +0,0 @@
+---diff --git a/pom.xml b/pom.xml
+---index 4a6af91..2b5130f 100644
+------ a/pom.xml
+---+++ b/pom.xml
+---@@ -1,7 +1,9 @@
+----<?xml version="1.0" encoding="UTF-8"?>
+----<project xmlns="http://maven.apache.org/POM/4.0.0"
+----	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+----	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+---+<?xml version="1.0" encoding="UTF-8" ?>
+---+<project
+---+    xmlns="http://maven.apache.org/POM/4.0.0"
+---+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+---+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+---+>
+--- 	<modelVersion>4.0.0</modelVersion>
+--- 	<parent>
+--- 		<groupId>org.springframework.boot</groupId>
+---@@ -40,7 +42,7 @@
+--- 			<groupId>org.springframework.boot</groupId>
+--- 			<artifactId>spring-boot-starter-webmvc</artifactId>
+--- 		</dependency>
+----		
+---+
+--- 
+--- 		<dependency>
+--- 			<groupId>org.springframework.boot</groupId>
+---@@ -95,55 +97,41 @@
+--- 	</dependencies>
+--- 
+--- 	<build>
+----		<plugins>
+---+    <plugins>
+---+        <plugin>
+---+            <groupId>org.springframework.boot</groupId>
+---+            <artifactId>spring-boot-maven-plugin</artifactId>
+---+            <configuration>
+---+                <excludes>
+---+                    <exclude>
+---+                        <groupId>org.projectlombok</groupId>
+---+                        <artifactId>lombok</artifactId>
+---+                    </exclude>
+---+                </excludes>
+---+            </configuration>
+---+        </plugin>
+--- 
+----			<plugin>
+----				<groupId>org.springframework.boot</groupId>
+----				<artifactId>spring-boot-maven-plugin</artifactId>
+----				<configuration>
+----					<excludes>
+----						<exclude>
+----							<groupId>org.projectlombok</groupId>
+----							<artifactId>lombok</artifactId>
+----						</exclude>
+----					</excludes>
+----				</configuration>
+----			</plugin>
+----			<plugin>
+----				<groupId>org.apache.maven.plugins</groupId>
+----				<artifactId>maven-compiler-plugin</artifactId>
+----				<version>3.8.1</version>
+----				<configuration>
+----					<source>17</source> <!-- depending on your project -->
+----					<target>17</target> <!-- depending on your project -->
+----					<annotationProcessorPaths>
+----						<path>
+----							<groupId>org.projectlombok</groupId>
+----							<artifactId>lombok</artifactId>
+----							<version>1.18.30</version>
+----						</path>
+----						<path>
+----							<groupId>org.mapstruct</groupId>
+----							<artifactId>mapstruct-processor</artifactId>
+----							<version>${org.mapstruct.version}</version>
+----						</path>
+----						<!-- other annotation processors -->
+----					</annotationProcessorPaths>
+----				</configuration>
+----			</plugin>
+----			<plugin>
+----				<groupId>org.springframework.boot</groupId>
+----				<artifactId>spring-boot-maven-plugin</artifactId>
+----				<configuration>
+----					<excludes>
+----						<exclude>
+----							<groupId>org.projectlombok</groupId>
+----							<artifactId>lombok</artifactId>
+----						</exclude>
+----					</excludes>
+----				</configuration>
+----			</plugin>
+----		</plugins>
+----	</build>
+---+        <plugin>
+---+            <groupId>org.apache.maven.plugins</groupId>
+---+            <artifactId>maven-compiler-plugin</artifactId>
+---+            <version>3.13.0</version> <configuration>
+---+                <source>25</source>
+---+                <target>25</target>
+---+                <annotationProcessorPaths>
+---+                    <path>
+---+                        <groupId>org.projectlombok</groupId>
+---+                        <artifactId>lombok</artifactId>
+---+                        <version>1.18.36</version>
+---+                    </path>
+---+                    <path>
+---+                        <groupId>org.mapstruct</groupId>
+---+                        <artifactId>mapstruct-processor</artifactId>
+---+                        <version>${org.mapstruct.version}</version>
+---+                    </path>
+---+                </annotationProcessorPaths>
+---+            </configuration>
+---+        </plugin>
+---+    </plugins>
+---+</build>
+--- 
+----</project>
+---\ No newline at end of file
+---+</project>
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
+---index 3ba7900..24040c1 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
+---@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
+--- import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
+--- import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
+--- import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
+---+import com.Ecommerce.EcommerceApp.Lib.AppConstants;
+--- 
+---+import jakarta.validation.Valid;
+--- import lombok.RequiredArgsConstructor;
+--- 
+--- @RestController
+---@@ -31,10 +33,10 @@ public class ProductController {
+--- 
+---     @GetMapping("/public")
+---     public ResponseEntity<ProductResponseDto> getProducts(
+----            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+----            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+----            @RequestParam(name = "sortBy", defaultValue = "name", required = false) String sortBy,
+----            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder) {
+---+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+---+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+---+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
+---+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder) {
+---         ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
+--- 
+---         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
+---@@ -80,7 +82,7 @@ public class ProductController {
+--- 
+--- 
+---     @PostMapping("/admin/categories/{categoryId}")
+----    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+---+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+---         ProductDto savedProductDto = productService.saveProduct(productDto, categoryId);
+--- 
+---         return new ResponseEntity<>(savedProductDto, HttpStatus.CREATED);
+---@@ -88,7 +90,7 @@ public class ProductController {
+---     }
+--- 
+---     @PutMapping("/admin/{id}")
+----    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+---+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
+---         ProductDto updatedProductDto = productService.updateProduct(id, productDto);
+--- 
+---         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java b/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
+---index 66835db..8dad35a 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
+---@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
+--- @SpringBootApplication
+--- public class EcommerceAppApplication {
+--- 
+----	public static void main(String[] args) {
+----		SpringApplication.run(EcommerceAppApplication.class, args);
+----	}
+----
+---+    public static void main(String[] args) {
+---+        SpringApplication.run(EcommerceAppApplication.class, args);
+---+    }
+--- }
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java b/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
+---index fcb6d5a..47ffd78 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
+---@@ -4,6 +4,8 @@ public class AppConstants {
+---     public static final String PAGE_NUMBER = "0";
+---     public static final String PAGE_SIZE = "10";
+---     public static final String SORT_CATEGORIES_BY = "id";
+---+    public static final String SORT_PRODUCT_BY = "id"; 
+---     public static final String SORT_CATEGORIES_DIR = "asc";
+---+    public static final String SORT_PRODUCTS_DIR = "asc";
+--- 
+--- }
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java b/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
+---index 06faa07..bc5d82a 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
+---@@ -1,27 +1,27 @@
+--- package com.Ecommerce.EcommerceApp.Mappers;
+--- 
+---+import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
+---+import com.Ecommerce.EcommerceApp.Models.Category;
+--- import java.util.List;
+----
+--- import org.mapstruct.Mapper;
+--- import org.mapstruct.Mapping;
+--- import org.mapstruct.MappingTarget;
+--- 
+----import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
+----import com.Ecommerce.EcommerceApp.Models.Category;
+----
+--- @Mapper(componentModel = "spring")
+----public interface CategoryMapper {   
+----      
+----    CategoryDto toDto(Category category); 
+---+public interface CategoryMapper {
+---+    CategoryDto toDto(Category category);
+--- 
+----       @Mapping(target = "createdAt", ignore = true)
+---+    @Mapping(target = "createdAt", ignore = true)
+---     @Mapping(target = "updatedAt", ignore = true)
+----    Category toEntity(CategoryDto categoryDto); 
+---+    @Mapping(target = "products", ignore = true)
+---+    Category toEntity(CategoryDto categoryDto);
+--- 
+----    List<CategoryDto> toDto(List<Category> categories); 
+---+    List<CategoryDto> toDto(List<Category> categories);
+--- 
+----     @Mapping(target = "createdAt", ignore = true)
+---+    @Mapping(target = "createdAt", ignore = true)
+---     @Mapping(target = "updatedAt", ignore = true)
+----     void updateCategoryFromDto(CategoryDto categoryDto, @MappingTarget Category category);
+----    
+---+    void updateCategoryFromDto(
+---+        CategoryDto categoryDto,
+---+        @MappingTarget Category category
+---+    );
+--- }
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java b/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
+---index 7387aed..7fea3a3 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
+---@@ -1,14 +1,17 @@
+--- package com.Ecommerce.EcommerceApp.Models;
+--- 
+--- import java.time.LocalDateTime;
+---+import java.util.List;
+--- 
+--- import org.hibernate.annotations.CreationTimestamp;
+--- import org.hibernate.annotations.UpdateTimestamp;
+--- 
+---+import jakarta.persistence.CascadeType;
+--- import jakarta.persistence.Entity;
+--- import jakarta.persistence.GeneratedValue;
+--- import jakarta.persistence.GenerationType;
+--- import jakarta.persistence.Id;
+---+import jakarta.persistence.OneToMany;
+--- import jakarta.validation.constraints.NotBlank;
+--- import jakarta.validation.constraints.Size;
+--- import lombok.AllArgsConstructor;
+---@@ -28,6 +31,9 @@ public class Category {
+---     @Size(min = 2, message = "Category name must be at least 2 characters long")
+---     private String name;
+--- 
+---+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+---+    private List<Product> products; 
+---+
+---      @CreationTimestamp
+---     private LocalDateTime createdAt;
+--- 
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java b/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
+---index f7072a4..580ed47 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
+---@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
+--- import jakarta.persistence.JoinColumn;
+--- import jakarta.persistence.ManyToOne;
+--- import jakarta.persistence.Table;
+---+import jakarta.validation.constraints.NotBlank;
+---+import jakarta.validation.constraints.Size;
+--- import lombok.AllArgsConstructor;
+--- import lombok.Data;
+--- import lombok.NoArgsConstructor;
+---@@ -26,7 +28,12 @@ public class Product {
+---     @Id
+---     @GeneratedValue(strategy = GenerationType.AUTO)
+---     private Long id;
+---+
+---+    @NotBlank
+---+    @Size(min = 3, message = "Product Name must contain atleast 3 character")
+---     private String name;
+---+    @NotBlank
+---+    @Size(min=6, message = "Product description must contain atleast 6  characters")
+---     private String description;
+---     private Integer quantity;
+---     private Double price;
+---@@ -37,7 +44,8 @@ public class Product {
+---     @ManyToOne
+---     @JoinColumn(name = "category_id")
+---     private Category category;
+----
+---+    
+---+    
+---     @CreationTimestamp
+---     private LocalDateTime createdAt;
+--- 
+---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
+---index debde0c..121f7bd 100644
+------ a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
+---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
+---@@ -22,12 +22,13 @@ import com.Ecommerce.EcommerceApp.Models.Product;
+--- import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
+--- import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
+--- 
+----
+--- import lombok.RequiredArgsConstructor;
+--- 
+--- /**
+---- * Implementation of the ProductService interface for managing product operations.
+---- * This service handles CRUD operations for products, including pagination, sorting,
+---+ * Implementation of the ProductService interface for managing product
+---+ * operations.
+---+ * This service handles CRUD operations for products, including pagination,
+---+ * sorting,
+---  * and associations with categories.
+---  */
+--- @Service
+---@@ -36,14 +37,15 @@ public class ProductServiceImpl implements ProductService {
+--- 
+---     private final ProductRepository productRepository;
+---     private final ProductMapper productMapper;
+----    private final ICategoryRepository categoryRepository; 
+---+    private final ICategoryRepository categoryRepository;
+--- 
+---     /**
+---      * Retrieves a paginated and sorted list of products.
+---+     * 
+---      * @param pageNumber the page number (0-based)
+----     * @param pageSize the number of products per page
+----     * @param sortBy the field to sort by
+----     * @param sortOrder the sort order ("asc" or "desc")
+---+     * @param pageSize   the number of products per page
+---+     * @param sortBy     the field to sort by
+---+     * @param sortOrder  the sort order ("asc" or "desc")
+---      * @return ProductResponseDto containing the products and pagination metadata
+---      * @throws ApiException if no products are found
+---      */
+---@@ -56,8 +58,8 @@ public class ProductServiceImpl implements ProductService {
+---         Page<Product> productPage = productRepository.findAll(pageDetails);
+---         List<Product> products = productPage.getContent();
+--- 
+----        if (products.isEmpty() || products.size() == 0)
+----            throw new ApiException("No Product created till now");
+---+        // if (products.isEmpty() || products.size() == 0)
+---+        //     throw new ApiException("No Product created till now");
+--- 
+---         List<ProductDto> productDtoList = productMapper.toDto(products);
+---         return new ProductResponseDto(
+---@@ -74,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
+--- 
+---     /**
+---      * Retrieves a product by its ID.
+---+     * 
+---      * @param id the product ID
+---      * @return ProductDto of the found product
+---      * @throws ResourceNotFoundException if the product is not found
+---@@ -86,11 +89,10 @@ public class ProductServiceImpl implements ProductService {
+---         return productMapper.toDto(product);
+---     }
+--- 
+----    
+----
+---     /**
+---      * Creates a new product and associates it with a category.
+---      * Calculates special price based on discount.
+---+     * 
+---      * @param productDto the product data transfer object
+---      * @param categoryId the ID of the category to associate
+---      * @return ProductDto of the created product
+---@@ -102,24 +104,40 @@ public class ProductServiceImpl implements ProductService {
+---         Category category = categoryRepository.findById(categoryId)
+---                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+--- 
+----        product.setCategory(category);
+----        product.setImageUrl("something.png");
+---+        boolean isProductExist = false;
+---+
+---+        List<Product> products = category.getProducts();
+--- 
+----        Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0; 
+---+        for (Product value : products) {
+---+            if (value.getName().equals(productDto.getName())) {
+---+                isProductExist = true;
+---+                break;
+---+            }
+---+        }
+--- 
+----        Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
+----        product.setSpecialPrice(specialPrice);
+---+        if (!isProductExist) {
+---+            product.setCategory(category);
+---+            product.setImageUrl("something.png");
+--- 
+---+            Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0;
+--- 
+---+            Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
+---+            product.setSpecialPrice(specialPrice);
+--- 
+----        Product savedProduct = productRepository.save(product);
+---+            Product savedProduct = productRepository.save(product);
+---+
+---+            return productMapper.toDto(savedProduct);
+---+
+---+        } else {
+---+            throw new ApiException("Product already exist");
+---+        }
+--- 
+----        return productMapper.toDto(savedProduct);
+---     }
+--- 
+---     /**
+---      * Updates an existing product with new data.
+----     * @param id the product ID
+---+     * 
+---+     * @param id         the product ID
+---      * @param productDto the updated product data
+---      * @return ProductDto of the updated product
+---      * @throws ResourceNotFoundException if the product is not found
+---@@ -141,6 +159,7 @@ public class ProductServiceImpl implements ProductService {
+--- 
+---     /**
+---      * Deletes a product by its ID.
+---+     * 
+---      * @param id the product ID
+---      * @return ProductDto of the deleted product
+---      * @throws ResourceNotFoundException if the product is not found
+---@@ -157,39 +176,41 @@ public class ProductServiceImpl implements ProductService {
+---     }
+--- 
+---     @Override
+----    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+---+    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
+---+            String sortOrder) {
+--- 
+---         Category category = categoryRepository.findById(categoryId)
+---                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+----        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);  
+---+        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+--- 
+----        List<ProductDto> productDtoList = productMapper.toDto(products); 
+---+        List<ProductDto> productDtoList = productMapper.toDto(products);
+--- 
+----        return productDtoList; 
+---+        return productDtoList;
+---     }
+--- 
+---     @Override
+----    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+---+    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+---+            String sortOrder) {
+--- 
+----        
+----        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');  
+---+        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
+--- 
+----        List<ProductDto> productDtoList = productMapper.toDto(products); 
+---+        List<ProductDto> productDtoList = productMapper.toDto(products);
+--- 
+----        return productDtoList; 
+---+        return productDtoList;
+---     }
+--- 
+----	@Override
+----	public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
+----		Product product  = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+----        // String path = "/images"; 
+---+    @Override
+---+    public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
+---+        Product product = productRepository.findById(productId)
+---+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+---+        // String path = "/images";
+---         String fileName = Utils.uploadImage(image);
+----        
+---+
+---         product.setImageUrl(fileName);
+--- 
+----        Product updatedProduct = productRepository.save(product); 
+---+        Product updatedProduct = productRepository.save(product);
+--- 
+----        return productMapper.toDto(updatedProduct); 
+----	}
+---+        return productMapper.toDto(updatedProduct);
+---+    }
+--- 
+--- }
+---diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+---index 928ce21..01bb3cb 100644
+------ a/src/main/resources/application.properties
+---+++ b/src/main/resources/application.properties
+---@@ -13,4 +13,5 @@ spring.jpa.show-sql=true
+--- spring.jpa.properties.hibernate.format_sql=true
+--- 
+--- 
+----logging.level.web=DEBUG 
+---\ No newline at end of file
+---+logging.level.web=DEBUG 
+---+
 --diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
---index 3ba7900..24040c1 100644
+--index 24040c1..e9328ad 100644
 ----- a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
 --+++ b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
---@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
--- import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
--- import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
--- import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
---+import com.Ecommerce.EcommerceApp.Lib.AppConstants;
+--@@ -53,36 +53,37 @@ public class ProductController {
 -- 
---+import jakarta.validation.Valid;
--- import lombok.RequiredArgsConstructor;
--- 
--- @RestController
---@@ -31,10 +33,10 @@ public class ProductController {
--- 
---     @GetMapping("/public")
---     public ResponseEntity<ProductResponseDto> getProducts(
+--     @GetMapping("/public/categories/{categoryId}")
+--     public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable Long categoryId,
 ---            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
 ---            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
 ---            @RequestParam(name = "sortBy", defaultValue = "name", required = false) String sortBy,
----            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder) {
+---            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder
 --+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 --+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
 --+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
---+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder) {
---         ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
+--+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
+-- 
+--     ) {
+---        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy, sortOrder);
+--+        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy,
+--+                sortOrder);
 -- 
 --         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
---@@ -80,7 +82,7 @@ public class ProductController {
 -- 
+--     }
 -- 
+---
+---     @GetMapping("/public/keyword/{keyword}")
+--+    @GetMapping("/public/keyword/{keyword}")
+--     public ResponseEntity<List<ProductDto>> getProductsByKeyword(@PathVariable String keyword,
+---            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+---            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+---            @RequestParam(name = "sortBy", defaultValue = "name", required = false) String sortBy,
+---            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder
+--+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+--+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+--+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
+--+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
+-- 
+--     ) {
+---        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy, sortOrder);
+--+        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
+--+                sortOrder);
+-- 
+--         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
+-- 
+--     }
+-- 
+---
 --     @PostMapping("/admin/categories/{categoryId}")
----    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @PathVariable Long categoryId) {
---+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+---    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long categoryId) {
+--+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto,
+--+            @PathVariable Long categoryId) {
 --         ProductDto savedProductDto = productService.saveProduct(productDto, categoryId);
 -- 
 --         return new ResponseEntity<>(savedProductDto, HttpStatus.CREATED);
---@@ -88,7 +90,7 @@ public class ProductController {
+--@@ -97,8 +98,9 @@ public class ProductController {
+-- 
 --     }
 -- 
---     @PutMapping("/admin/{id}")
----    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
---+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
---         ProductDto updatedProductDto = productService.updateProduct(id, productDto);
+---     @PutMapping("/public/{productId}/image")
+---    public ResponseEntity<ProductDto> updateProductImage(@PathVariable Long productId, @RequestParam("image") MultipartFile image ) throws IOException {
+--+    @PutMapping("/public/{productId}/image")
+--+    public ResponseEntity<ProductDto> updateProductImage(@PathVariable Long productId,
+--+            @RequestParam("image") MultipartFile image) throws IOException {
+--         ProductDto updatedProductDto = productService.updateProductImage(productId, image);
 -- 
 --         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java b/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
---index 66835db..8dad35a 100644
------ a/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
---+++ b/src/main/java/com/Ecommerce/EcommerceApp/EcommerceAppApplication.java
---@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
--- @SpringBootApplication
--- public class EcommerceAppApplication {
+--diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java b/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
+--index da723f7..42b04b5 100644
+----- a/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
+--+++ b/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
+--@@ -2,7 +2,8 @@ package com.Ecommerce.EcommerceApp.Repositories;
 -- 
----	public static void main(String[] args) {
----		SpringApplication.run(EcommerceAppApplication.class, args);
----	}
----
---+    public static void main(String[] args) {
---+        SpringApplication.run(EcommerceAppApplication.class, args);
---+    }
--- }
---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java b/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
---index fcb6d5a..47ffd78 100644
------ a/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Lib/AppConstants.java
---@@ -4,6 +4,8 @@ public class AppConstants {
---     public static final String PAGE_NUMBER = "0";
---     public static final String PAGE_SIZE = "10";
---     public static final String SORT_CATEGORIES_BY = "id";
---+    public static final String SORT_PRODUCT_BY = "id"; 
---     public static final String SORT_CATEGORIES_DIR = "asc";
---+    public static final String SORT_PRODUCTS_DIR = "asc";
--- 
--- }
---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java b/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
---index 06faa07..bc5d82a 100644
------ a/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Mappers/CategoryMapper.java
---@@ -1,27 +1,27 @@
--- package com.Ecommerce.EcommerceApp.Mappers;
--- 
---+import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
---+import com.Ecommerce.EcommerceApp.Models.Category;
 -- import java.util.List;
+-- 
 ---
--- import org.mapstruct.Mapper;
--- import org.mapstruct.Mapping;
--- import org.mapstruct.MappingTarget;
+--+import org.springframework.data.domain.Page;
+--+import org.springframework.data.domain.Pageable;
+-- import org.springframework.data.jpa.repository.JpaRepository;
+-- import org.springframework.stereotype.Repository;
 -- 
----import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
----import com.Ecommerce.EcommerceApp.Models.Category;
----
--- @Mapper(componentModel = "spring")
----public interface CategoryMapper {   
----      
----    CategoryDto toDto(Category category); 
---+public interface CategoryMapper {
---+    CategoryDto toDto(Category category);
+--@@ -11,7 +12,7 @@ import com.Ecommerce.EcommerceApp.Models.Product;
 -- 
----       @Mapping(target = "createdAt", ignore = true)
---+    @Mapping(target = "createdAt", ignore = true)
---     @Mapping(target = "updatedAt", ignore = true)
----    Category toEntity(CategoryDto categoryDto); 
---+    @Mapping(target = "products", ignore = true)
---+    Category toEntity(CategoryDto categoryDto);
--- 
----    List<CategoryDto> toDto(List<Category> categories); 
---+    List<CategoryDto> toDto(List<Category> categories);
--- 
----     @Mapping(target = "createdAt", ignore = true)
---+    @Mapping(target = "createdAt", ignore = true)
---     @Mapping(target = "updatedAt", ignore = true)
----     void updateCategoryFromDto(CategoryDto categoryDto, @MappingTarget Category category);
----    
---+    void updateCategoryFromDto(
---+        CategoryDto categoryDto,
---+        @MappingTarget Category category
---+    );
+-- @Repository
+-- public interface ProductRepository extends JpaRepository<Product, Long>  {
+---    List<Product> findByCategoryOrderByPriceAsc(Category category);
+---    List<Product> findByNameLikeIgnoreCase(String keyword);  
+--+    Page<Product> findByCategoryOrderByPriceAsc(Category category, Pageable pageDetails);
+--+    Page<Product> findByNameLikeIgnoreCase(String keyword, Pageable pageDetails);  
+--     
 -- }
---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java b/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
---index 7387aed..7fea3a3 100644
------ a/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Models/Category.java
---@@ -1,14 +1,17 @@
--- package com.Ecommerce.EcommerceApp.Models;
--- 
--- import java.time.LocalDateTime;
---+import java.util.List;
--- 
--- import org.hibernate.annotations.CreationTimestamp;
--- import org.hibernate.annotations.UpdateTimestamp;
--- 
---+import jakarta.persistence.CascadeType;
--- import jakarta.persistence.Entity;
--- import jakarta.persistence.GeneratedValue;
--- import jakarta.persistence.GenerationType;
--- import jakarta.persistence.Id;
---+import jakarta.persistence.OneToMany;
--- import jakarta.validation.constraints.NotBlank;
--- import jakarta.validation.constraints.Size;
--- import lombok.AllArgsConstructor;
---@@ -28,6 +31,9 @@ public class Category {
---     @Size(min = 2, message = "Category name must be at least 2 characters long")
---     private String name;
--- 
---+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
---+    private List<Product> products; 
---+
---      @CreationTimestamp
---     private LocalDateTime createdAt;
--- 
---diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java b/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
---index f7072a4..580ed47 100644
------ a/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
---+++ b/src/main/java/com/Ecommerce/EcommerceApp/Models/Product.java
---@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
--- import jakarta.persistence.JoinColumn;
--- import jakarta.persistence.ManyToOne;
--- import jakarta.persistence.Table;
---+import jakarta.validation.constraints.NotBlank;
---+import jakarta.validation.constraints.Size;
--- import lombok.AllArgsConstructor;
--- import lombok.Data;
--- import lombok.NoArgsConstructor;
---@@ -26,7 +28,12 @@ public class Product {
---     @Id
---     @GeneratedValue(strategy = GenerationType.AUTO)
---     private Long id;
---+
---+    @NotBlank
---+    @Size(min = 3, message = "Product Name must contain atleast 3 character")
---     private String name;
---+    @NotBlank
---+    @Size(min=6, message = "Product description must contain atleast 6  characters")
---     private String description;
---     private Integer quantity;
---     private Double price;
---@@ -37,7 +44,8 @@ public class Product {
---     @ManyToOne
---     @JoinColumn(name = "category_id")
---     private Category category;
----
---+    
---+    
---     @CreationTimestamp
---     private LocalDateTime createdAt;
--- 
 --diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
---index debde0c..121f7bd 100644
+--index 121f7bd..0f9593a 100644
 ----- a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
 --+++ b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
---@@ -22,12 +22,13 @@ import com.Ecommerce.EcommerceApp.Models.Product;
--- import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
--- import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
--- 
----
--- import lombok.RequiredArgsConstructor;
--- 
--- /**
---- * Implementation of the ProductService interface for managing product operations.
---- * This service handles CRUD operations for products, including pagination, sorting,
---+ * Implementation of the ProductService interface for managing product
---+ * operations.
---+ * This service handles CRUD operations for products, including pagination,
---+ * sorting,
---  * and associations with categories.
---  */
--- @Service
---@@ -36,14 +37,15 @@ public class ProductServiceImpl implements ProductService {
--- 
---     private final ProductRepository productRepository;
---     private final ProductMapper productMapper;
----    private final ICategoryRepository categoryRepository; 
---+    private final ICategoryRepository categoryRepository;
--- 
---     /**
---      * Retrieves a paginated and sorted list of products.
---+     * 
---      * @param pageNumber the page number (0-based)
----     * @param pageSize the number of products per page
----     * @param sortBy the field to sort by
----     * @param sortOrder the sort order ("asc" or "desc")
---+     * @param pageSize   the number of products per page
---+     * @param sortBy     the field to sort by
---+     * @param sortOrder  the sort order ("asc" or "desc")
---      * @return ProductResponseDto containing the products and pagination metadata
+--@@ -50,7 +50,11 @@ public class ProductServiceImpl implements ProductService {
 --      * @throws ApiException if no products are found
 --      */
---@@ -56,8 +58,8 @@ public class ProductServiceImpl implements ProductService {
---         Page<Product> productPage = productRepository.findAll(pageDetails);
+--     @Override
+---    public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+--+    public ProductResponseDto getAllProducts(
+--+            Integer pageNumber,
+--+            Integer pageSize,
+--+            String sortBy,
+--+            String sortOrder) {
+--         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+--                 : Sort.by(sortBy).descending();
+--         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+--@@ -59,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 --         List<Product> products = productPage.getContent();
 -- 
----        if (products.isEmpty() || products.size() == 0)
----            throw new ApiException("No Product created till now");
---+        // if (products.isEmpty() || products.size() == 0)
---+        //     throw new ApiException("No Product created till now");
+--         // if (products.isEmpty() || products.size() == 0)
+---        //     throw new ApiException("No Product created till now");
+--+        // throw new ApiException("No Product created till now");
 -- 
 --         List<ProductDto> productDtoList = productMapper.toDto(products);
 --         return new ProductResponseDto(
---@@ -74,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
+--@@ -179,9 +183,18 @@ public class ProductServiceImpl implements ProductService {
+--     public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
+--             String sortOrder) {
 -- 
---     /**
---      * Retrieves a product by its ID.
---+     * 
---      * @param id the product ID
---      * @return ProductDto of the found product
---      * @throws ResourceNotFoundException if the product is not found
---@@ -86,11 +89,10 @@ public class ProductServiceImpl implements ProductService {
---         return productMapper.toDto(product);
---     }
--- 
----    
----
---     /**
---      * Creates a new product and associates it with a category.
---      * Calculates special price based on discount.
---+     * 
---      * @param productDto the product data transfer object
---      * @param categoryId the ID of the category to associate
---      * @return ProductDto of the created product
---@@ -102,24 +104,40 @@ public class ProductServiceImpl implements ProductService {
+--+                Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+--+                : Sort.by(sortBy).descending();
+--+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+--+
+--+             
+--+
 --         Category category = categoryRepository.findById(categoryId)
 --                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
--- 
----        product.setCategory(category);
----        product.setImageUrl("something.png");
---+        boolean isProductExist = false;
+---        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+--+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+--+        Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
 --+
---+        List<Product> products = category.getProducts();
+--+        List<Product> products = productPage.getContent(); 
 -- 
----        Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0; 
---+        for (Product value : products) {
---+            if (value.getName().equals(productDto.getName())) {
---+                isProductExist = true;
---+                break;
---+            }
---+        }
+--         List<ProductDto> productDtoList = productMapper.toDto(products);
 -- 
----        Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
----        product.setSpecialPrice(specialPrice);
---+        if (!isProductExist) {
---+            product.setCategory(category);
---+            product.setImageUrl("something.png");
+--@@ -192,7 +205,20 @@ public class ProductServiceImpl implements ProductService {
+--     public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+--             String sortOrder) {
 -- 
---+            Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0;
--- 
---+            Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
---+            product.setSpecialPrice(specialPrice);
--- 
----        Product savedProduct = productRepository.save(product);
---+            Product savedProduct = productRepository.save(product);
+---        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
+--+                 Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+--+                : Sort.by(sortBy).descending();
+--+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 --+
---+            return productMapper.toDto(savedProduct);
+--+             
 --+
---+        } else {
---+            throw new ApiException("Product already exist");
---+        }
--- 
----        return productMapper.toDto(savedProduct);
---     }
--- 
---     /**
---      * Updates an existing product with new data.
----     * @param id the product ID
---+     * 
---+     * @param id         the product ID
---      * @param productDto the updated product data
---      * @return ProductDto of the updated product
---      * @throws ResourceNotFoundException if the product is not found
---@@ -141,6 +159,7 @@ public class ProductServiceImpl implements ProductService {
--- 
---     /**
---      * Deletes a product by its ID.
---+     * 
---      * @param id the product ID
---      * @return ProductDto of the deleted product
---      * @throws ResourceNotFoundException if the product is not found
---@@ -157,39 +176,41 @@ public class ProductServiceImpl implements ProductService {
---     }
--- 
---     @Override
----    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
---+    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
---+            String sortOrder) {
--- 
---         Category category = categoryRepository.findById(categoryId)
---                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
----        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);  
---+        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
--- 
----        List<ProductDto> productDtoList = productMapper.toDto(products); 
---+        List<ProductDto> productDtoList = productMapper.toDto(products);
--- 
----        return productDtoList; 
---+        return productDtoList;
---     }
--- 
---     @Override
----    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
---+    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
---+            String sortOrder) {
--- 
----        
----        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');  
---+        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
--- 
----        List<ProductDto> productDtoList = productMapper.toDto(products); 
---+        List<ProductDto> productDtoList = productMapper.toDto(products);
--- 
----        return productDtoList; 
---+        return productDtoList;
---     }
--- 
----	@Override
----	public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
----		Product product  = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
----        // String path = "/images"; 
---+    @Override
---+    public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
---+        Product product = productRepository.findById(productId)
---+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
---+        // String path = "/images";
---         String fileName = Utils.uploadImage(image);
----        
+--+        // Category category = categoryRepository.findById(categoryId)
+--+        //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+--+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+--+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
 --+
---         product.setImageUrl(fileName);
--- 
----        Product updatedProduct = productRepository.save(product); 
---+        Product updatedProduct = productRepository.save(product);
--- 
----        return productMapper.toDto(updatedProduct); 
----	}
---+        return productMapper.toDto(updatedProduct);
---+    }
--- 
--- }
---diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
---index 928ce21..01bb3cb 100644
------ a/src/main/resources/application.properties
---+++ b/src/main/resources/application.properties
---@@ -13,4 +13,5 @@ spring.jpa.show-sql=true
--- spring.jpa.properties.hibernate.format_sql=true
--- 
--- 
----logging.level.web=DEBUG 
---\ No newline at end of file
---+logging.level.web=DEBUG 
+--+       List<Product> products = productPage.getContent(); 
 --+
--diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
--index 24040c1..e9328ad 100644
----- a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
--+++ b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
--@@ -53,36 +53,37 @@ public class ProductController {
-- 
--     @GetMapping("/public/categories/{categoryId}")
--     public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable Long categoryId,
---            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
---            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
---            @RequestParam(name = "sortBy", defaultValue = "name", required = false) String sortBy,
---            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder
--+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
--+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
--+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
--+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
-- 
--     ) {
---        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy, sortOrder);
--+        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy,
--+                sortOrder);
-- 
--         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
-- 
--     }
-- 
---
---     @GetMapping("/public/keyword/{keyword}")
--+    @GetMapping("/public/keyword/{keyword}")
--     public ResponseEntity<List<ProductDto>> getProductsByKeyword(@PathVariable String keyword,
---            @RequestParam(name = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
---            @RequestParam(name = "pageSize", defaultValue = "10", required = false) Integer pageSize,
---            @RequestParam(name = "sortBy", defaultValue = "name", required = false) String sortBy,
---            @RequestParam(name = "sortOrder", defaultValue = "asc", required = false) String sortOrder
--+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
--+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
--+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
--+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
-- 
--     ) {
---        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy, sortOrder);
--+        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
--+                sortOrder);
-- 
--         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
-- 
--     }
-- 
---
--     @PostMapping("/admin/categories/{categoryId}")
---    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long categoryId) {
--+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto,
--+            @PathVariable Long categoryId) {
--         ProductDto savedProductDto = productService.saveProduct(productDto, categoryId);
-- 
--         return new ResponseEntity<>(savedProductDto, HttpStatus.CREATED);
--@@ -97,8 +98,9 @@ public class ProductController {
-- 
--     }
-- 
---     @PutMapping("/public/{productId}/image")
---    public ResponseEntity<ProductDto> updateProductImage(@PathVariable Long productId, @RequestParam("image") MultipartFile image ) throws IOException {
--+    @PutMapping("/public/{productId}/image")
--+    public ResponseEntity<ProductDto> updateProductImage(@PathVariable Long productId,
--+            @RequestParam("image") MultipartFile image) throws IOException {
--         ProductDto updatedProductDto = productService.updateProductImage(productId, image);
-- 
--         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
--diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java b/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
--index da723f7..42b04b5 100644
----- a/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
--+++ b/src/main/java/com/Ecommerce/EcommerceApp/Repositories/ProductRepository.java
--@@ -2,7 +2,8 @@ package com.Ecommerce.EcommerceApp.Repositories;
-- 
-- import java.util.List;
-- 
---
--+import org.springframework.data.domain.Page;
--+import org.springframework.data.domain.Pageable;
-- import org.springframework.data.jpa.repository.JpaRepository;
-- import org.springframework.stereotype.Repository;
-- 
--@@ -11,7 +12,7 @@ import com.Ecommerce.EcommerceApp.Models.Product;
-- 
-- @Repository
-- public interface ProductRepository extends JpaRepository<Product, Long>  {
---    List<Product> findByCategoryOrderByPriceAsc(Category category);
---    List<Product> findByNameLikeIgnoreCase(String keyword);  
--+    Page<Product> findByCategoryOrderByPriceAsc(Category category, Pageable pageDetails);
--+    Page<Product> findByNameLikeIgnoreCase(String keyword, Pageable pageDetails);  
--     
-- }
+--+      
+-- 
+--         List<ProductDto> productDtoList = productMapper.toDto(products);
+-- 
 -diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
--index 121f7bd..0f9593a 100644
+-index 0f9593a..2089cbc 100644
 ---- a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
 -+++ b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
--@@ -50,7 +50,11 @@ public class ProductServiceImpl implements ProductService {
--      * @throws ApiException if no products are found
--      */
--     @Override
---    public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
--+    public ProductResponseDto getAllProducts(
--+            Integer pageNumber,
--+            Integer pageSize,
--+            String sortBy,
--+            String sortOrder) {
--         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
--                 : Sort.by(sortBy).descending();
--         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
--@@ -59,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
--         List<Product> products = productPage.getContent();
+-@@ -214,7 +214,7 @@ public class ProductServiceImpl implements ProductService {
+-         // Category category = categoryRepository.findById(categoryId)
+-         //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+-         // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+--        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
+-+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase("%" + keyword + "%", pageDetails);
 - 
--         // if (products.isEmpty() || products.size() == 0)
---        //     throw new ApiException("No Product created till now");
--+        // throw new ApiException("No Product created till now");
+-        List<Product> products = productPage.getContent(); 
 - 
--         List<ProductDto> productDtoList = productMapper.toDto(products);
--         return new ProductResponseDto(
--@@ -179,9 +183,18 @@ public class ProductServiceImpl implements ProductService {
--     public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
--             String sortOrder) {
-- 
--+                Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
--+                : Sort.by(sortBy).descending();
--+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
--+
--+             
--+
--         Category category = categoryRepository.findById(categoryId)
--                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
---        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
--+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
--+        Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
--+
--+        List<Product> products = productPage.getContent(); 
-- 
--         List<ProductDto> productDtoList = productMapper.toDto(products);
-- 
--@@ -192,7 +205,20 @@ public class ProductServiceImpl implements ProductService {
--     public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
--             String sortOrder) {
-- 
---        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
--+                 Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
--+                : Sort.by(sortBy).descending();
--+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
--+
--+             
--+
--+        // Category category = categoryRepository.findById(categoryId)
--+        //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
--+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
--+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
--+
--+       List<Product> products = productPage.getContent(); 
--+
--+      
-- 
--         List<ProductDto> productDtoList = productMapper.toDto(products);
-- 
+diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
+index e9328ad..36ad525 100644
+--- a/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
++++ b/src/main/java/com/Ecommerce/EcommerceApp/Controllers/ProductController.java
+@@ -52,32 +52,33 @@ public class ProductController {
+     }
+ 
+     @GetMapping("/public/categories/{categoryId}")
+-    public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable Long categoryId,
++    public ResponseEntity<ProductResponseDto> getProductsByCategory(@PathVariable Long categoryId,
+             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+             @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
+             @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
+ 
+     ) {
+-        List<ProductDto> productDtoList = productService.getProductsByCategory(categoryId, pageNumber, pageSize, sortBy,
++        ProductResponseDto productResponse = productService.getProductsByCategory(categoryId, pageNumber, pageSize,
++                sortBy,
+                 sortOrder);
+ 
+-        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
++        return new ResponseEntity<>(productResponse, HttpStatus.OK);
+ 
+     }
+ 
+-    @GetMapping("/public/keyword/{keyword}")
+-    public ResponseEntity<List<ProductDto>> getProductsByKeyword(@PathVariable String keyword,
++    @GetMapping("/public/search")
++    public ResponseEntity<ProductResponseDto> getProductsByKeyword(@RequestParam String keyword,
+             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+             @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
+             @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
+ 
+     ) {
+-        List<ProductDto> productDtoList = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
++        ProductResponseDto productResponse = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,
+                 sortOrder);
+ 
+-        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
++        return new ResponseEntity<>(productResponse, HttpStatus.OK);
+ 
+     }
+ 
+diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Interfaces/ProductService.java b/src/main/java/com/Ecommerce/EcommerceApp/Interfaces/ProductService.java
+index 2295740..35d9f93 100644
+--- a/src/main/java/com/Ecommerce/EcommerceApp/Interfaces/ProductService.java
++++ b/src/main/java/com/Ecommerce/EcommerceApp/Interfaces/ProductService.java
+@@ -1,7 +1,5 @@
+ package com.Ecommerce.EcommerceApp.Interfaces;
+ 
+-
+-
+ import java.io.IOException;
+ import java.util.List;
+ 
+@@ -21,9 +19,12 @@ public interface ProductService {
+ 
+     ProductDto deleteProduct(Long id);
+ 
+-    List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder); 
+-    List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
+-    
+-    ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException; 
++    ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
++            String sortOrder);
++
++    ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
++            String sortOrder);
++
++    ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException;
+ 
+ }
 diff --git a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
-index 0f9593a..2089cbc 100644
+index 2089cbc..f45c1a7 100644
 --- a/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
 +++ b/src/main/java/com/Ecommerce/EcommerceApp/Services/ProductServiceImpl.java
-@@ -214,7 +214,7 @@ public class ProductServiceImpl implements ProductService {
+@@ -180,49 +180,65 @@ public class ProductServiceImpl implements ProductService {
+     }
+ 
+     @Override
+-    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
++    public ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize,
++            String sortBy,
+             String sortOrder) {
+ 
+-                Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
++        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                 : Sort.by(sortBy).descending();
+         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+ 
+-             
+-
+         Category category = categoryRepository.findById(categoryId)
+                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+-        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
++        // List<Product> products =
++        // productRepository.findByCategoryOrderByPriceAsc(category);
+         Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
+ 
+-        List<Product> products = productPage.getContent(); 
++        List<Product> products = productPage.getContent();
+ 
+         List<ProductDto> productDtoList = productMapper.toDto(products);
+ 
+-        return productDtoList;
++        return new ProductResponseDto(
++
++                productDtoList,
++                productPage.getNumber(),
++                productPage.getSize(),
++                (int) productPage.getTotalElements(),
++                productPage.getTotalPages(),
++                productPage.isLast()
++
++        );
+     }
+ 
+     @Override
+-    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
++    public ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+             String sortOrder) {
+ 
+-                 Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
++        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                 : Sort.by(sortBy).descending();
+         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+ 
+-             
+-
          // Category category = categoryRepository.findById(categoryId)
-         //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-         // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
--        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
-+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase("%" + keyword + "%", pageDetails);
+-        //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+-        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
++        // .orElseThrow(() -> new ResourceNotFoundException("Category", "id",
++        // categoryId));
++        // List<Product> products =
++        // productRepository.findByCategoryOrderByPriceAsc(category);
+         Page<Product> productPage = productRepository.findByNameLikeIgnoreCase("%" + keyword + "%", pageDetails);
  
-        List<Product> products = productPage.getContent(); 
+-       List<Product> products = productPage.getContent(); 
+-
+-      
++        List<Product> products = productPage.getContent();
  
+         List<ProductDto> productDtoList = productMapper.toDto(products);
+ 
+-        return productDtoList;
++        return new ProductResponseDto(
++
++                productDtoList,
++                productPage.getNumber(),
++                productPage.getSize(),
++                (int) productPage.getTotalElements(),
++                productPage.getTotalPages(),
++                productPage.isLast()
++
++        );
+     }
+ 
+     @Override

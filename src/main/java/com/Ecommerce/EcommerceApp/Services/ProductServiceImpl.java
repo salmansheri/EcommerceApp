@@ -180,49 +180,65 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
+    public ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize,
+            String sortBy,
             String sortOrder) {
 
-                Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
-
-             
 
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        // List<Product> products =
+        // productRepository.findByCategoryOrderByPriceAsc(category);
         Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
 
-        List<Product> products = productPage.getContent(); 
+        List<Product> products = productPage.getContent();
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
 
-        return productDtoList;
+        return new ProductResponseDto(
+
+                productDtoList,
+                productPage.getNumber(),
+                productPage.getSize(),
+                (int) productPage.getTotalElements(),
+                productPage.getTotalPages(),
+                productPage.isLast()
+
+        );
     }
 
     @Override
-    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+    public ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
             String sortOrder) {
 
-                 Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 
-             
-
         // Category category = categoryRepository.findById(categoryId)
-        //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        // .orElseThrow(() -> new ResourceNotFoundException("Category", "id",
+        // categoryId));
+        // List<Product> products =
+        // productRepository.findByCategoryOrderByPriceAsc(category);
         Page<Product> productPage = productRepository.findByNameLikeIgnoreCase("%" + keyword + "%", pageDetails);
 
-       List<Product> products = productPage.getContent(); 
-
-      
+        List<Product> products = productPage.getContent();
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
 
-        return productDtoList;
+        return new ProductResponseDto(
+
+                productDtoList,
+                productPage.getNumber(),
+                productPage.getSize(),
+                (int) productPage.getTotalElements(),
+                productPage.getTotalPages(),
+                productPage.isLast()
+
+        );
     }
 
     @Override

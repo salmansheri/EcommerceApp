@@ -20,8 +20,8 @@ public interface CategoryMapper {
 
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "products", ignore = true)
     void updateCategoryFromDto(
-        CategoryDto categoryDto,
-        @MappingTarget Category category
-    );
+            CategoryDto categoryDto,
+            @MappingTarget Category category);
 }

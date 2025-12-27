@@ -1,11 +1,6 @@
 package com.Ecommerce.EcommerceApp.Dtos;
 
-
-
-
-
-
-
+import com.Ecommerce.EcommerceApp.Models.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +20,8 @@ public class ProductDto {
     private Double price;
     private Double specialPrice;
     private String imageUrl;
-    private Double discount; 
-    
-    
+    private Double discount;
+    private User user;
 
     // private Category category;
 

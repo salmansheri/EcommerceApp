@@ -22,12 +22,13 @@ import com.Ecommerce.EcommerceApp.Models.Product;
 import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
 import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
 
-
 import lombok.RequiredArgsConstructor;
 
 /**
- * Implementation of the ProductService interface for managing product operations.
- * This service handles CRUD operations for products, including pagination, sorting,
+ * Implementation of the ProductService interface for managing product
+ * operations.
+ * This service handles CRUD operations for products, including pagination,
+ * sorting,
  * and associations with categories.
  */
 @Service
@@ -36,14 +37,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-    private final ICategoryRepository categoryRepository; 
+    private final ICategoryRepository categoryRepository;
 
     /**
      * Retrieves a paginated and sorted list of products.
+     * 
      * @param pageNumber the page number (0-based)
-     * @param pageSize the number of products per page
-     * @param sortBy the field to sort by
-     * @param sortOrder the sort order ("asc" or "desc")
+     * @param pageSize   the number of products per page
+     * @param sortBy     the field to sort by
+     * @param sortOrder  the sort order ("asc" or "desc")
      * @return ProductResponseDto containing the products and pagination metadata
      * @throws ApiException if no products are found
      */
@@ -56,8 +58,8 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> productPage = productRepository.findAll(pageDetails);
         List<Product> products = productPage.getContent();
 
-        if (products.isEmpty() || products.size() == 0)
-            throw new ApiException("No Product created till now");
+        // if (products.isEmpty() || products.size() == 0)
+        //     throw new ApiException("No Product created till now");
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
         return new ProductResponseDto(
@@ -74,6 +76,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Retrieves a product by its ID.
+     * 
      * @param id the product ID
      * @return ProductDto of the found product
      * @throws ResourceNotFoundException if the product is not found
@@ -86,11 +89,10 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDto(product);
     }
 
-    
-
     /**
      * Creates a new product and associates it with a category.
      * Calculates special price based on discount.
+     * 
      * @param productDto the product data transfer object
      * @param categoryId the ID of the category to associate
      * @return ProductDto of the created product
@@ -102,24 +104,40 @@ public class ProductServiceImpl implements ProductService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 
-        product.setCategory(category);
-        product.setImageUrl("something.png");
+        boolean isProductExist = false;
 
-        Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0; 
+        List<Product> products = category.getProducts();
 
-        Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
-        product.setSpecialPrice(specialPrice);
+        for (Product value : products) {
+            if (value.getName().equals(productDto.getName())) {
+                isProductExist = true;
+                break;
+            }
+        }
 
+        if (!isProductExist) {
+            product.setCategory(category);
+            product.setImageUrl("something.png");
 
+            Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0;
 
-        Product savedProduct = productRepository.save(product);
+            Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
+            product.setSpecialPrice(specialPrice);
 
-        return productMapper.toDto(savedProduct);
+            Product savedProduct = productRepository.save(product);
+
+            return productMapper.toDto(savedProduct);
+
+        } else {
+            throw new ApiException("Product already exist");
+        }
+
     }
 
     /**
      * Updates an existing product with new data.
-     * @param id the product ID
+     * 
+     * @param id         the product ID
      * @param productDto the updated product data
      * @return ProductDto of the updated product
      * @throws ResourceNotFoundException if the product is not found
@@ -141,6 +159,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Deletes a product by its ID.
+     * 
      * @param id the product ID
      * @return ProductDto of the deleted product
      * @throws ResourceNotFoundException if the product is not found
@@ -157,39 +176,41 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+    public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
+            String sortOrder) {
 
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);  
+        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
 
-        List<ProductDto> productDtoList = productMapper.toDto(products); 
+        List<ProductDto> productDtoList = productMapper.toDto(products);
 
-        return productDtoList; 
+        return productDtoList;
     }
 
     @Override
-    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+    public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+            String sortOrder) {
 
-        
-        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');  
+        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
 
-        List<ProductDto> productDtoList = productMapper.toDto(products); 
+        List<ProductDto> productDtoList = productMapper.toDto(products);
 
-        return productDtoList; 
+        return productDtoList;
     }
 
-	@Override
-	public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
-		Product product  = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
-        // String path = "/images"; 
+    @Override
+    public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+        // String path = "/images";
         String fileName = Utils.uploadImage(image);
-        
+
         product.setImageUrl(fileName);
 
-        Product updatedProduct = productRepository.save(product); 
+        Product updatedProduct = productRepository.save(product);
 
-        return productMapper.toDto(updatedProduct); 
-	}
+        return productMapper.toDto(updatedProduct);
+    }
 
 }

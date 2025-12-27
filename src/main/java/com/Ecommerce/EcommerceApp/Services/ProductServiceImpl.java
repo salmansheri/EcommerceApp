@@ -214,7 +214,7 @@ public class ProductServiceImpl implements ProductService {
         // Category category = categoryRepository.findById(categoryId)
         //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
         // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
-        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase("%" + keyword + "%", pageDetails);
 
        List<Product> products = productPage.getContent(); 
 

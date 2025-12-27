@@ -50,7 +50,11 @@ public class ProductServiceImpl implements ProductService {
      * @throws ApiException if no products are found
      */
     @Override
-    public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+    public ProductResponseDto getAllProducts(
+            Integer pageNumber,
+            Integer pageSize,
+            String sortBy,
+            String sortOrder) {
         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
@@ -59,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productPage.getContent();
 
         // if (products.isEmpty() || products.size() == 0)
-        //     throw new ApiException("No Product created till now");
+        // throw new ApiException("No Product created till now");
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
         return new ProductResponseDto(
@@ -179,9 +183,18 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy,
             String sortOrder) {
 
+                Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+
+             
+
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
+
+        List<Product> products = productPage.getContent(); 
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
 
@@ -192,7 +205,20 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
             String sortOrder) {
 
-        List<Product> products = productRepository.findByNameLikeIgnoreCase('%' + keyword + '%');
+                 Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+
+             
+
+        // Category category = categoryRepository.findById(categoryId)
+        //         .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+        // List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        Page<Product> productPage = productRepository.findByNameLikeIgnoreCase(keyword, pageDetails);
+
+       List<Product> products = productPage.getContent(); 
+
+      
 
         List<ProductDto> productDtoList = productMapper.toDto(products);
 

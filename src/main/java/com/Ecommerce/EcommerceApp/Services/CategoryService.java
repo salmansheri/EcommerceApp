@@ -1,6 +1,10 @@
 package com.Ecommerce.EcommerceApp.Services;
 
 import java.util.List;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +40,8 @@ public class CategoryService implements ICategoryService {
 	private final CategoryMapper categoryMapper;
 
 	@Override
+	@Cacheable(value = "ecommerce::categoryList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}",
+			unless = "#result.data.size() == 0")
 	public CategoryResponseDto getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
 		Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
 				: Sort.by(sortBy).descending();
@@ -55,6 +61,7 @@ public class CategoryService implements ICategoryService {
 	}
 
 	@Override
+	@CacheEvict(value = "ecommerce::categoryList", allEntries = true)
 	public CategoryDto createCategory(CategoryDto categoryDto) {
 		// category.setId(nextId++);
 
@@ -77,6 +84,8 @@ public class CategoryService implements ICategoryService {
 	}
 
 	@Override
+	@Caching(evict = { @CacheEvict(value = "ecommerce::categoryList", allEntries = true),
+			@CacheEvict(value = "ecommerce::categoryById", key = "#categoryId") })
 	public CategoryDto deleteCategory(Long categoryId) {
 
 		Category category = categoryRepo.findById(categoryId)
@@ -89,6 +98,8 @@ public class CategoryService implements ICategoryService {
 	}
 
 	@Override
+	@Caching(evict = { @CacheEvict(value = "ecommerce::categoryList", allEntries = true),
+			@CacheEvict(value = "ecommerce::categoryById", key = "#categoryId") })
 	public CategoryDto updateCategory(Long categoryId, CategoryDto updatedCategoryDto) {
 
 		if (updatedCategoryDto == null) {

@@ -3,6 +3,11 @@ package com.Ecommerce.EcommerceApp.Services;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.annotations.Cache;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,6 +54,8 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ApiException if no products are found
 	 */
 	@Override
+	@Cacheable(value = "ecommerce::productList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}",
+			unless = "#result.data.size() == 0")
 	public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
 		Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
 				: Sort.by(sortBy).descending();
@@ -75,6 +82,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the product is not found
 	 */
 	@Override
+	@Cacheable(value = "ecommerce::productById", key = "#id")
 	public ProductDto getProduct(Long id) {
 		Product product = productRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
@@ -91,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the category is not found
 	 */
 	@Override
+	@CacheEvict(value = "ecommerce::productList", allEntries = true)
 	public ProductDto saveProduct(ProductDto productDto, Long categoryId) {
 		Product product = productMapper.toEntity(productDto);
 		Category category = categoryRepository.findById(categoryId)
@@ -135,6 +144,10 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the product is not found
 	 */
 	@Override
+	@Caching(evict = { @CacheEvict(value = "ecommerce::productById", key = "#id"),
+			@CacheEvict(value = "ecommerce::productList", allEntries = true)
+
+	})
 	public ProductDto updateProduct(Long id, ProductDto productDto) {
 		Product existingProduct = productRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
@@ -156,6 +169,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the product is not found
 	 */
 	@Override
+	@CacheEvict(value = "ecommerce::productById", key = "#id")
 	public ProductDto deleteProduct(Long id) {
 		Product existingProduct = productRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
@@ -167,6 +181,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Cacheable(value = "ecommerce::productListByCategory",
+			key = "{#categoryId, #pageNumber, #pageSize, #sortBy, #sortOrder}", unless = "#result.data.size() == 0")
 	public ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize,
 			String sortBy, String sortOrder) {
 
@@ -193,6 +209,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	// @Cacheable(
+	// value = "ecommerce::productList",
+	// key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}",
+	// unless = "#result.data.size() == 0"
+	// )
 	public ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
 			String sortOrder) {
 
@@ -220,6 +241,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@CacheEvict(value = "ecommerce::productList", allEntries = true)
 	public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
 		Product product = productRepository.findById(productId)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));

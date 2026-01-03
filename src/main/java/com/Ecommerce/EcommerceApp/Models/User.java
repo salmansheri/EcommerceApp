@@ -1,5 +1,6 @@
 package com.Ecommerce.EcommerceApp.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Table(name = "users",
 		uniqueConstraints = { @UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email") })
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

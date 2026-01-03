@@ -18,18 +18,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO {
 
-    private Long userId;
+	private Long userId;
 
-    private String username;
+	private String username;
 
-    private String email;
+	private String email;
 
-    private String password;
+	private String password;
 
-    private Set<Role> roles = new HashSet<>();
+	private Set<Role> roles = new HashSet<>();
 
-    private List<Product> products;
+	private List<Product> products;
 
-    private List<Address> addresses = new ArrayList<>();
+	private List<Address> addresses = new ArrayList<>();
 
 }

@@ -1,16 +1,16 @@
 package com.Ecommerce.EcommerceApp.Interfaces;
 
-
 import com.Ecommerce.EcommerceApp.Dtos.CategoryDto;
 import com.Ecommerce.EcommerceApp.Dtos.CategoryResponseDto;
 
 public interface ICategoryService {
-    CategoryResponseDto getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
 
-    CategoryDto createCategory(CategoryDto category);
+	CategoryResponseDto getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
 
-    CategoryDto deleteCategory(Long categoryId);
+	CategoryDto createCategory(CategoryDto category);
 
-    CategoryDto updateCategory(Long categoryId, CategoryDto updatedCategory);
+	CategoryDto deleteCategory(Long categoryId);
+
+	CategoryDto updateCategory(Long categoryId, CategoryDto updatedCategory);
 
 }

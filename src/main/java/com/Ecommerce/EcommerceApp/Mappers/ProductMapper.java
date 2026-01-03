@@ -12,21 +12,21 @@ import com.Ecommerce.EcommerceApp.Models.Product;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductDto toDto(Product product);
+	ProductDto toDto(Product product);
 
-    List<ProductDto> toDto(List<Product> product);
+	List<ProductDto> toDto(List<Product> product);
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "category", ignore = true)
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "category", ignore = true)
 
-    Product toEntity(ProductDto productDto);
+	Product toEntity(ProductDto productDto);
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "category", ignore = true)
-    @Mapping(target = "id", ignore = true)
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "category", ignore = true)
+	@Mapping(target = "id", ignore = true)
 
-    void updateProductFromDto(ProductDto productDto, @MappingTarget Product product);
+	void updateProductFromDto(ProductDto productDto, @MappingTarget Product product);
 
 }

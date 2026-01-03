@@ -22,50 +22,49 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AuthTokenFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private  JwtUtils jwtUtils;
+	@Autowired
+	private JwtUtils jwtUtils;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-   
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		log.debug("AuthTokenFilter called for URI: {}", request.getRequestURI());
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        log.debug("AuthTokenFilter called for URI: {}", request.getRequestURI());
+		try {
+			String jwt = parseJwt(request);
 
-        try {
-            String jwt = parseJwt(request);
+			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+				String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
+				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+						userDetails, null, userDetails.getAuthorities());
 
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+				log.debug("Roles from JWT: {}", userDetails.getAuthorities());
 
-                log.debug("Roles from JWT: {}", userDetails.getAuthorities());
+				authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+			}
 
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }
+		}
+		catch (Exception ex) {
+			logger.error("Cannot set user authentication: {}", ex);
 
-        } catch (Exception ex) {
-            logger.error("Cannot set user authentication: {}", ex);
+		}
 
-        }
+		filterChain.doFilter(request, response);
 
-        filterChain.doFilter(request, response);
+	}
 
-    }
-
-    private String parseJwt(HttpServletRequest request) {
-        String jwt = jwtUtils.getjwtFromHeader(request);
-        log.debug("AuthTokenFilter.java: {}", jwt);
-        return jwt;
-    }
+	private String parseJwt(HttpServletRequest request) {
+		String jwt = jwtUtils.getjwtFromHeader(request);
+		log.debug("AuthTokenFilter.java: {}", jwt);
+		return jwt;
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.Ecommerce.EcommerceApp.Dtos; 
+package com.Ecommerce.EcommerceApp.Dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-    Long id;
-    String name;
+
+	Long id;
+
+	String name;
 
 }

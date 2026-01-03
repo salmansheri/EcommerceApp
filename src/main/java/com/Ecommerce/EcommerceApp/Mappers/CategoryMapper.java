@@ -9,19 +9,19 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    CategoryDto toDto(Category category);
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "products", ignore = true)
-    Category toEntity(CategoryDto categoryDto);
+	CategoryDto toDto(Category category);
 
-    List<CategoryDto> toDto(List<Category> categories);
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "products", ignore = true)
+	Category toEntity(CategoryDto categoryDto);
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "products", ignore = true)
-    void updateCategoryFromDto(
-            CategoryDto categoryDto,
-            @MappingTarget Category category);
+	List<CategoryDto> toDto(List<Category> categories);
+
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "products", ignore = true)
+	void updateCategoryFromDto(CategoryDto categoryDto, @MappingTarget Category category);
+
 }

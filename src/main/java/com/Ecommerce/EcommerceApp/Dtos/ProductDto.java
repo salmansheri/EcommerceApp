@@ -13,16 +13,24 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductDto {
 
-    private Long id;
-    private String name;
-    private String description;
-    private Integer quantity;
-    private Double price;
-    private Double specialPrice;
-    private String imageUrl;
-    private Double discount;
-    private User user;
+	private Long id;
 
-    // private Category category;
+	private String name;
+
+	private String description;
+
+	private Integer quantity;
+
+	private Double price;
+
+	private Double specialPrice;
+
+	private String imageUrl;
+
+	private Double discount;
+
+	private User user;
+
+	// private Category category;
 
 }

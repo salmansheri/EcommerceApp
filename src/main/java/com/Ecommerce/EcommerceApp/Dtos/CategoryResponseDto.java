@@ -10,11 +10,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryResponseDto {
-    private List<CategoryDto> data;
-    private Integer pageNumber;
-    private Integer pageSize;
-    private Integer totalElements;
-    private Integer totalPages;
-    private boolean lastPage;
+
+	private List<CategoryDto> data;
+
+	private Integer pageNumber;
+
+	private Integer pageSize;
+
+	private Integer totalElements;
+
+	private Integer totalPages;
+
+	private boolean lastPage;
 
 }

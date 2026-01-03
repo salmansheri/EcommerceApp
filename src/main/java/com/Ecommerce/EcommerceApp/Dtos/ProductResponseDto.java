@@ -12,11 +12,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponseDto {
-     private List<ProductDto> data;
-    private Integer pageNumber;
-    private Integer pageSize;
-    private Integer totalElements;
-    private Integer totalPages;
-    private boolean lastPage;
+
+	private List<ProductDto> data;
+
+	private Integer pageNumber;
+
+	private Integer pageSize;
+
+	private Integer totalElements;
+
+	private Integer totalPages;
+
+	private boolean lastPage;
 
 }

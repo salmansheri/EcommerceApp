@@ -12,12 +12,12 @@ import com.Ecommerce.EcommerceApp.Models.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDTO toDto(User user);
+	UserDTO toDto(User user);
 
-    List<UserDTO> toDto(List<User> users);
+	List<UserDTO> toDto(List<User> users);
 
-    User toEntity(UserDTO productDto);
+	User toEntity(UserDTO productDto);
 
-    void updateUserFromDto(UserDTO userDTO, @MappingTarget User user);
+	void updateUserFromDto(UserDTO userDTO, @MappingTarget User user);
 
 }

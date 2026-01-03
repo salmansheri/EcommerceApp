@@ -20,14 +20,14 @@ import lombok.ToString;
 @Table(name = "roles")
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
-    private Long roleId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "role_id")
+	private Long roleId;
 
-    @ToString.Exclude
-    @Column(length = 20, name = "role_name")
-    @Enumerated(EnumType.STRING)
-    private AppRole roleName;
+	@ToString.Exclude
+	@Column(length = 20, name = "role_name")
+	@Enumerated(EnumType.STRING)
+	private AppRole roleName;
 
 }

@@ -10,6 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiResponseDto {
-    private String message; 
-    private boolean status; 
+
+	private String message;
+
+	private boolean status;
+
 }

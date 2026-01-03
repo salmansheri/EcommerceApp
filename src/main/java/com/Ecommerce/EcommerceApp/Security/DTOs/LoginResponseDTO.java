@@ -10,8 +10,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class LoginResponseDTO {
-    private String jwtToken;
-    private String username;
-    private List<String> roles;
+
+	private Long id;
+
+	private String jwtToken;
+
+	private String username;
+
+	private List<String> roles;
 
 }

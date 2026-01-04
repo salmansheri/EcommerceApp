@@ -13,6 +13,7 @@ import com.Ecommerce.EcommerceApp.Interfaces.AuthService;
 import com.Ecommerce.EcommerceApp.Security.DTOs.LoginRequestDTO;
 import com.Ecommerce.EcommerceApp.Security.DTOs.LoginResponseDTO;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -36,7 +37,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/sign-up")
-	public ResponseEntity<MessageResponseDTO> signUp(@RequestBody SignUpRequestDTO requestDTO) {
+	public ResponseEntity<MessageResponseDTO> signUp(@Valid @RequestBody SignUpRequestDTO requestDTO) {
 		MessageResponseDTO messageDTO = authService.signUp(requestDTO);
 
 		return new ResponseEntity<>(messageDTO, HttpStatus.CREATED);

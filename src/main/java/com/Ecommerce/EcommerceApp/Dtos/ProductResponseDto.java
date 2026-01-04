@@ -1,5 +1,6 @@
 package com.Ecommerce.EcommerceApp.Dtos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto {
+public class ProductResponseDto implements Serializable {
 
 	private List<ProductDto> data;
 

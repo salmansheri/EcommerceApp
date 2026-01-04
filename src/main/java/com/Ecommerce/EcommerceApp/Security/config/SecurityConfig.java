@@ -59,10 +59,9 @@ public class SecurityConfig {
 			.permitAll()
 			.requestMatchers("/v3/api-docs/**")
 			.permitAll()
-			.requestMatchers("/api/v1/products/public/**")
+			.requestMatchers("/error/**")
 			.permitAll()
-			.requestMatchers("/api/v1/public/**")
-			.permitAll()
+
 			.requestMatchers("/api/v1/admin/**")
 			.permitAll()
 			.requestMatchers("/images/**")

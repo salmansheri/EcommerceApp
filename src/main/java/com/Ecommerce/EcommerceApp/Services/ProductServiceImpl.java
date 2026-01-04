@@ -3,9 +3,7 @@ package com.Ecommerce.EcommerceApp.Services;
 import java.io.IOException;
 import java.util.List;
 
-import org.hibernate.annotations.Cache;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
@@ -169,7 +167,12 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the product is not found
 	 */
 	@Override
-	@CacheEvict(value = "ecommerce::productById", key = "#id")
+	// @CacheEvict(value = "ecommerce::productById", key = "#id")
+	@Caching(evict = { @CacheEvict(value = "ecommerce::productById", key = "#id"),
+			@CacheEvict(value = "ecommerce::productList", allEntries = true),
+			@CacheEvict(value = "ecommerce::productListByCategory", allEntries = true),
+
+	})
 	public ProductDto deleteProduct(Long id) {
 		Product existingProduct = productRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));

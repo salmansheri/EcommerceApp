@@ -1,5 +1,6 @@
 package com.Ecommerce.EcommerceApp.Dtos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryResponseDto {
+public class CategoryResponseDto implements Serializable {
 
 	private List<CategoryDto> data;
 

@@ -1,5 +1,7 @@
 package com.Ecommerce.EcommerceApp.Dtos;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDto {
+public class CategoryDto implements Serializable {
 
 	Long id;
 

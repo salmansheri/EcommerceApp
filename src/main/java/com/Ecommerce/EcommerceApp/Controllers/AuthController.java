@@ -1,5 +1,6 @@
 package com.Ecommerce.EcommerceApp.Controllers;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,8 @@ public class AuthController {
 	public ResponseEntity<LoginResponseDTO> signIn(@RequestBody LoginRequestDTO loginRequestDTO) {
 		LoginResponseDTO responseDTO = authService.signIn(loginRequestDTO);
 
-		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, responseDTO.getJwtCookie().toString())
+				.body(responseDTO);
 
 	}
 

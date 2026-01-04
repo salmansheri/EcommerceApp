@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -55,14 +56,14 @@ public class AuthServiceImpl implements AuthService {
 
 			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-			String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
+			ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
 			List<String> roles = userDetails.getAuthorities()
 				.stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-			LoginResponseDTO responseDTO = new LoginResponseDTO(userDetails.getId(), jwtToken,
+			LoginResponseDTO responseDTO = new LoginResponseDTO(userDetails.getId(), jwtCookie, 
 					userDetails.getUsername(), roles);
 
 			return responseDTO;

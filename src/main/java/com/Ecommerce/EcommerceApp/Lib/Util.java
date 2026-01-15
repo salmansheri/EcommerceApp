@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Utils {
+public class Util {
 
 	public static String uploadImage(MultipartFile image) throws IOException {
 

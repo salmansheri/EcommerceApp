@@ -18,7 +18,7 @@ import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
 import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
 import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
 import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
-import com.Ecommerce.EcommerceApp.Lib.Utils;
+import com.Ecommerce.EcommerceApp.Lib.Util;
 import com.Ecommerce.EcommerceApp.Mappers.ProductMapper;
 import com.Ecommerce.EcommerceApp.Models.Category;
 import com.Ecommerce.EcommerceApp.Models.Product;
@@ -150,7 +150,7 @@ public class ProductServiceImpl implements ProductService {
 		Product existingProduct = productRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
 
-		existingProduct.setId(id);
+		existingProduct.setProductId(id);
 
 		productMapper.updateProductFromDto(productDto, existingProduct);
 
@@ -249,7 +249,7 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findById(productId)
 			.orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
 		// String path = "/images";
-		String fileName = Utils.uploadImage(image);
+		String fileName = Util.uploadImage(image);
 
 		product.setImageUrl(fileName);
 

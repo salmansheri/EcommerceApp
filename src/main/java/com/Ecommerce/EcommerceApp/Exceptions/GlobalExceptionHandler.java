@@ -1,9 +1,5 @@
 package com.Ecommerce.EcommerceApp.Exceptions;
 
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.Ecommerce.EcommerceApp.Dtos.ApiResponseDto;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.Ecommerce.EcommerceApp.Dtos.ApiResponseDto;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -45,7 +44,20 @@ public class GlobalExceptionHandler {
 		String message = ex.getMessage();
 		ApiResponseDto apiResponseDto = new ApiResponseDto(message, false);
 
+	
+
 		return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+
+	}
+
+
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<ApiResponseDto> customUnauthorizedException(UnauthorizedException ex) {
+
+		String message = ex.getMessage(); 
+		ApiResponseDto apiResponseDto = new ApiResponseDto(message, false);
+		
+		return new ResponseEntity<>(apiResponseDto, HttpStatus.UNAUTHORIZED); 
 
 	}
 

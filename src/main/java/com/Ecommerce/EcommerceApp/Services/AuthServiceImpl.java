@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.Ecommerce.EcommerceApp.Dtos.MessageResponseDTO;
 import com.Ecommerce.EcommerceApp.Dtos.SignUpRequestDTO;
 import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
+import com.Ecommerce.EcommerceApp.Exceptions.UnauthorizedException;
 import com.Ecommerce.EcommerceApp.Interfaces.AuthService;
 import com.Ecommerce.EcommerceApp.Models.AppRole;
 import com.Ecommerce.EcommerceApp.Models.Role;
@@ -59,17 +60,16 @@ public class AuthServiceImpl implements AuthService {
 			ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
 			List<String> roles = userDetails.getAuthorities()
-				.stream()
-				.map(item -> item.getAuthority())
-				.collect(Collectors.toList());
+					.stream()
+					.map(item -> item.getAuthority())
+					.collect(Collectors.toList());
 
-			LoginResponseDTO responseDTO = new LoginResponseDTO(userDetails.getId(), jwtCookie, 
+			LoginResponseDTO responseDTO = new LoginResponseDTO(userDetails.getId(), jwtCookie,
 					userDetails.getUsername(), roles);
 
 			return responseDTO;
 
-		}
-		catch (AuthenticationException exception) {
+		} catch (AuthenticationException exception) {
 
 			// throw new AuthenticationException(map.toString());
 			throw new BadCredentialsException("Invalid username and password");
@@ -98,31 +98,30 @@ public class AuthServiceImpl implements AuthService {
 
 		if (strRoles == null) {
 			Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
-				.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
 
 			roles.add(userRole);
-		}
-		else {
+		} else {
 
 			strRoles.forEach(role -> {
 				switch (role) {
 					case "admin":
 						Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+								.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
 
 						roles.add(adminRole);
 						break;
 
 					case "seller":
 						Role sellerRole = roleRepository.findByRoleName(AppRole.ROLE_SELLER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+								.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
 
 						roles.add(sellerRole);
 						break;
 
 					default:
 						Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
+								.orElseThrow(() -> new RuntimeException("Error: Role is not found"));
 
 						roles.add(userRole);
 						break;
@@ -136,6 +135,45 @@ public class AuthServiceImpl implements AuthService {
 		userRepository.save(user);
 
 		return new MessageResponseDTO("Signed Up Successfully!");
+
+	}
+
+	@Override
+	public LoginResponseDTO getCurrentUsername(Authentication authentication) {
+		LoginResponseDTO responseDTO = new LoginResponseDTO();
+
+		if (authentication != null) {
+			responseDTO.setUsername(authentication.getName());
+			// responseDTO.setId(authentication.get);
+
+			return responseDTO;
+
+		} else {
+			throw new UnauthorizedException();
+		}
+
+	}
+
+	@Override
+	public UserDetailsImpl getCurrentUserDetails(Authentication authentication) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+		if (userDetails != null) {
+			return userDetails;
+		} else {
+			throw new UnauthorizedException();
+		}
+	}
+
+	@Override
+	public LoginResponseDTO signOut() {
+		ResponseCookie cookie = jwtUtils.removeJwtCookie();
+
+		LoginResponseDTO responseDTO = new LoginResponseDTO();
+
+		responseDTO.setJwtCookie(cookie);
+
+		return responseDTO;
 
 	}
 

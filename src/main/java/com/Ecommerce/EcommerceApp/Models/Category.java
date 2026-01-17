@@ -33,7 +33,7 @@ public class Category implements Serializable {
 	@Size(min = 2, message = "Category name must be at least 2 characters long")
 	private String name;
 
-	@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Product> products;
 
 	@CreationTimestamp

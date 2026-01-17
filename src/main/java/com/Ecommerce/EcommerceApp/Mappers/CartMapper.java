@@ -1,5 +1,7 @@
 package com.Ecommerce.EcommerceApp.Mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,5 +17,7 @@ public interface CartMapper {
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "cartItems", ignore = true)
     Cart toEntity(CartDTO cartDTO);
+
+    List<CartDTO> toDTOList(List<Cart> carts); 
     
 }

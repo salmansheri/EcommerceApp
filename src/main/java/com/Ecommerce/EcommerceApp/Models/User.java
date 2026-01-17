@@ -60,7 +60,7 @@ public class User implements Serializable {
 	private Set<Role> roles = new HashSet<>();
 
 	@ToString.Exclude
-	@OneToMany(mappedBy = "users", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private List<Product> products;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -69,7 +69,7 @@ public class User implements Serializable {
 	private List<Address> addresses = new ArrayList<>();
 
 	@ToString.Exclude
-	@OneToOne(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)	
+	@OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)	
 	private Cart cart; 
 
 	public User(String username, String email, String password) {

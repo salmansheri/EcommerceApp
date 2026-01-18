@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 
 import com.Ecommerce.EcommerceApp.Dtos.CartDTO;
-import com.Ecommerce.EcommerceApp.Dtos.CartItemDTO;
 import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
 import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
 import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
@@ -34,7 +33,6 @@ public class CartServiceImpl implements CartService {
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
     private final ProductMapper productMapper;
-    
 
     @Override
     public CartDTO addProductToCart(Long productId, Integer quantity) {
@@ -197,15 +195,26 @@ public class CartServiceImpl implements CartService {
             throw new ApiException("Product " + product.getName() + " not available in the cart");
         }
 
-        cartItem.setProductPrice(product.getSpecialPrice());
+        int newQuantity = cartItem.getQuantity() + quantity;
 
-        cartItem.setQuantity(cartItem.getQuantity() + quantity);
+        if (newQuantity < 0) {
+            throw new ApiException("The resulting quantity cannot be negative");
+        }
 
-        cartItem.setDiscount(product.getDiscount());
+        if (newQuantity == 0) {
+            deleteProductFromCart(cart.getCartId(), productId);
+        } else {
+            cartItem.setProductPrice(product.getSpecialPrice());
 
-        cart.setTotalPrice(userCart.getTotalPrice() + (cartItem.getProductPrice() * quantity));
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
 
-        cartRepository.save(cart);
+            cartItem.setDiscount(product.getDiscount());
+
+            cart.setTotalPrice(userCart.getTotalPrice() + (cartItem.getProductPrice() * quantity));
+
+            cartRepository.save(cart);
+
+        }
 
         CartItem updateCartItem = cartItemRepository.save(cartItem);
 
@@ -233,22 +242,49 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public String deleteProductFromCart(Long cartId, Long productId) {
 
-        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Cart", "CartId", cartId)); 
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart", "CartId", cartId));
 
-        CartItem cartItem = cartItemRepository.findCartItemByProductIdAndCartId(cartId, productId); 
+        CartItem cartItem = cartItemRepository.findCartItemByProductIdAndCartId(cartId, productId);
 
         if (cartItem == null) {
-            throw new ResourceNotFoundException("Product", "ProductId", productId); 
+            throw new ResourceNotFoundException("Product", "ProductId", productId);
         }
 
         cart.setTotalPrice(cart.getTotalPrice() - (cartItem.getProductPrice() * cartItem.getQuantity()));
 
-        cartItemRepository.deleteCartItemByProductIdAndCartId(cartId, productId); 
+        cartItemRepository.deleteCartItemByProductIdAndCartId(cartId, productId);
 
-        return "Product Successfully Delete from the cart"; 
-       
+        return "Product Successfully Delete from the cart";
+
+    }
+
+    @Override
+    public void updateProductInCarts(Long cartId, Long id) {
+
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart", "CartId", cartId));
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "ProductId", id));
+
+        CartItem cartItem = cartItemRepository.findCartItemByProductIdAndCartId(cartId, id);
+
+        if (cartItem == null) {
+            throw new ApiException("Product " + product.getName() + " not available");
+        }
+
+        double cartPrice = cart.getTotalPrice() - (cartItem.getProductPrice() * cartItem.getQuantity());
+
+        cartItem.setProductPrice(product.getSpecialPrice());
+
+        cart.setTotalPrice(cartPrice + (cartItem.getProductPrice() * cartItem.getQuantity()));
+
+        cartItem = cartItemRepository.save(cartItem);
+
     }
 
 }

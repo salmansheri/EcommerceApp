@@ -13,23 +13,30 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Ecommerce.EcommerceApp.Dtos.CartDTO;
 import com.Ecommerce.EcommerceApp.Dtos.ProductDto;
 import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
 import com.Ecommerce.EcommerceApp.Exceptions.ApiException;
 import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
+import com.Ecommerce.EcommerceApp.Interfaces.CartService;
 import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
 import com.Ecommerce.EcommerceApp.Lib.Util;
+import com.Ecommerce.EcommerceApp.Mappers.CartMapper;
 import com.Ecommerce.EcommerceApp.Mappers.ProductMapper;
+import com.Ecommerce.EcommerceApp.Models.Cart;
 import com.Ecommerce.EcommerceApp.Models.Category;
 import com.Ecommerce.EcommerceApp.Models.Product;
+import com.Ecommerce.EcommerceApp.Repositories.CartRepository;
 import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
 import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
 /**
- * Implementation of the ProductService interface for managing product operations. This
- * service handles CRUD operations for products, including pagination, sorting, and
+ * Implementation of the ProductService interface for managing product
+ * operations. This
+ * service handles CRUD operations for products, including pagination, sorting,
+ * and
  * associations with categories.
  */
 @Service
@@ -42,18 +49,24 @@ public class ProductServiceImpl implements ProductService {
 
 	private final ICategoryRepository categoryRepository;
 
+	private final CartService cartService;
+
+	private final CartRepository cartRepository;
+
+	private final CartMapper cartMapper;
+
 	/**
 	 * Retrieves a paginated and sorted list of products.
+	 * 
 	 * @param pageNumber the page number (0-based)
-	 * @param pageSize the number of products per page
-	 * @param sortBy the field to sort by
-	 * @param sortOrder the sort order ("asc" or "desc")
+	 * @param pageSize   the number of products per page
+	 * @param sortBy     the field to sort by
+	 * @param sortOrder  the sort order ("asc" or "desc")
 	 * @return ProductResponseDto containing the products and pagination metadata
 	 * @throws ApiException if no products are found
 	 */
 	@Override
-	@Cacheable(value = "ecommerce::productList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}",
-			unless = "#result.data.size() == 0")
+	@Cacheable(value = "ecommerce::productList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}", unless = "#result.data.size() == 0")
 	public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
 		Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
 				: Sort.by(sortBy).descending();
@@ -75,6 +88,7 @@ public class ProductServiceImpl implements ProductService {
 
 	/**
 	 * Retrieves a product by its ID.
+	 * 
 	 * @param id the product ID
 	 * @return ProductDto of the found product
 	 * @throws ResourceNotFoundException if the product is not found
@@ -83,14 +97,16 @@ public class ProductServiceImpl implements ProductService {
 	@Cacheable(value = "ecommerce::productById", key = "#id")
 	public ProductDto getProduct(Long id) {
 		Product product = productRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+				.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
 
 		return productMapper.toDto(product);
 	}
 
 	/**
-	 * Creates a new product and associates it with a category. Calculates special price
+	 * Creates a new product and associates it with a category. Calculates special
+	 * price
 	 * based on discount.
+	 * 
 	 * @param productDto the product data transfer object
 	 * @param categoryId the ID of the category to associate
 	 * @return ProductDto of the created product
@@ -101,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDto saveProduct(ProductDto productDto, Long categoryId) {
 		Product product = productMapper.toEntity(productDto);
 		Category category = categoryRepository.findById(categoryId)
-			.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 
 		boolean isProductExist = false;
 
@@ -127,8 +143,7 @@ public class ProductServiceImpl implements ProductService {
 
 			return productMapper.toDto(savedProduct);
 
-		}
-		else {
+		} else {
 			throw new ApiException("Product already exist");
 		}
 
@@ -136,7 +151,8 @@ public class ProductServiceImpl implements ProductService {
 
 	/**
 	 * Updates an existing product with new data.
-	 * @param id the product ID
+	 * 
+	 * @param id         the product ID
 	 * @param productDto the updated product data
 	 * @return ProductDto of the updated product
 	 * @throws ResourceNotFoundException if the product is not found
@@ -148,7 +164,7 @@ public class ProductServiceImpl implements ProductService {
 	})
 	public ProductDto updateProduct(Long id, ProductDto productDto) {
 		Product existingProduct = productRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+				.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
 
 		existingProduct.setProductId(id);
 
@@ -156,12 +172,25 @@ public class ProductServiceImpl implements ProductService {
 
 		Product updatedProduct = productRepository.save(existingProduct);
 
+		List<Cart> carts = cartRepository.findCartsByProductId(id);
+
+		List<CartDTO> cartDTOs = carts.stream().map(cart -> {
+			CartDTO cartDTO = cartMapper.toDTO(cart);
+			List<ProductDto> productDtos = cart.getCartItems().stream().map(ci -> productMapper.toDto(ci.getProduct()))
+					.toList();
+			cartDTO.setProducts(productDtos);
+			return cartDTO;
+		}).toList();
+
+		cartDTOs.forEach(cart -> cartService.updateProductInCarts(cart.getCartId(), id));
+
 		return productMapper.toDto(updatedProduct);
 
 	}
 
 	/**
 	 * Deletes a product by its ID.
+	 * 
 	 * @param id the product ID
 	 * @return ProductDto of the deleted product
 	 * @throws ResourceNotFoundException if the product is not found
@@ -175,7 +204,11 @@ public class ProductServiceImpl implements ProductService {
 	})
 	public ProductDto deleteProduct(Long id) {
 		Product existingProduct = productRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+				.orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+
+		List<Cart> carts = cartRepository.findCartsByProductId(id);
+
+		carts.forEach(cart -> cartService.deleteProductFromCart(cart.getCartId(), id));
 
 		productRepository.delete(existingProduct);
 
@@ -184,8 +217,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	@Cacheable(value = "ecommerce::productListByCategory",
-			key = "{#categoryId, #pageNumber, #pageSize, #sortBy, #sortOrder}", unless = "#result.data.size() == 0")
+	@Cacheable(value = "ecommerce::productListByCategory", key = "{#categoryId, #pageNumber, #pageSize, #sortBy, #sortOrder}", unless = "#result.data.size() == 0")
 	public ProductResponseDto getProductsByCategory(Long categoryId, Integer pageNumber, Integer pageSize,
 			String sortBy, String sortOrder) {
 
@@ -194,7 +226,7 @@ public class ProductServiceImpl implements ProductService {
 		Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 
 		Category category = categoryRepository.findById(categoryId)
-			.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
 		// List<Product> products =
 		// productRepository.findByCategoryOrderByPriceAsc(category);
 		Page<Product> productPage = productRepository.findByCategoryOrderByPriceAsc(category, pageDetails);
@@ -247,7 +279,7 @@ public class ProductServiceImpl implements ProductService {
 	@CacheEvict(value = "ecommerce::productList", allEntries = true)
 	public ProductDto updateProductImage(Long productId, MultipartFile image) throws IOException {
 		Product product = productRepository.findById(productId)
-			.orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+				.orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
 		// String path = "/images";
 		String fileName = Util.uploadImage(image);
 

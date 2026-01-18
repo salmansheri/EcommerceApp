@@ -1,14 +1,12 @@
 package com.Ecommerce.EcommerceApp.Models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -50,11 +48,12 @@ public class Address {
 	private String country;
 
 	@NotBlank
-	@Size(min = 6, message = "Pin code name must be atleast 5 characters")
+	@Size(min = 5, message = "Pin code name must be atleast 5 characters")
 	private String pincode;
 
-	@ManyToMany(mappedBy = "addresses")
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	@ToString.Exclude
-	private List<User> users = new ArrayList<>();
+	private User user;
 
 }

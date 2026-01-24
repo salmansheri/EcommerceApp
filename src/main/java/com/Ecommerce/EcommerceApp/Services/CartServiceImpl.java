@@ -108,6 +108,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    // @Cacheable(value = "ecommerce::cartList")
     public List<CartDTO> getAllCarts() {
         List<Cart> carts = cartRepository.findAll();
 
@@ -137,6 +138,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    // @Cacheable(value = "ecommerce::cartByEmail", key="#emailId")
     public CartDTO getCart(String emailId) {
         Cart cart = cartRepository.findCartByEmail(emailId);
         Long cartId = cart.getCartId();
@@ -162,6 +164,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
+   
     public CartDTO updateProductQuantityInCart(Long productId, Integer quantity) {
         String emailId = authUtil.loggedInEmail();
 

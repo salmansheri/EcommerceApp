@@ -17,6 +17,7 @@ import com.Ecommerce.EcommerceApp.Mappers.AddressMapper;
 import com.Ecommerce.EcommerceApp.Models.Address;
 import com.Ecommerce.EcommerceApp.Models.User;
 import com.Ecommerce.EcommerceApp.Repositories.AddressRepository;
+import com.Ecommerce.EcommerceApp.Repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,11 +26,12 @@ import lombok.RequiredArgsConstructor;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
     private final AddressMapper addressMapper;
     private final AuthUtils authUtils;
 
     @Override
-    @CacheEvict(value = "Ecommerce::Addresses", allEntries = true)
+    @CacheEvict(value = "ecommerce::addressList", allEntries = true)
     public @Nullable AddressDTO createAddress(AddressDTO addressDTO) {
 
         User user = authUtils.loggedInUser();
@@ -51,7 +53,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    @Cacheable(value = "ecommerce::AddressList")
+    @Cacheable(value = "ecommerce::addressList")
     public List<AddressDTO> getAllAddresses() {
         List<Address> addresses = addressRepository.findAll();
 
@@ -63,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    @Cacheable(value = "ecommerce::AddressById", key = "#addressId")
+    @Cacheable(value = "ecommerce::addressById", key = "#addressId")
     public AddressDTO getAddressesById(Long addressId) {
         Address address = addressRepository.findById(addressId)
                 .orElseThrow(() -> new ResourceNotFoundException("Address", "AddressId", addressId));
@@ -80,8 +82,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value = "ecommerce::AddressList", allEntries = true),
-            @CacheEvict(value = "ecommerce::AddressById", key = "#addressId")
+            @CacheEvict(value = "ecommerce::addressList", allEntries = true),
+            @CacheEvict(value = "ecommerce::addressById", key = "#addressId")
 
     })
     public AddressDTO updateAddressById(Long addressId, AddressDTO addressDTO) {
@@ -100,14 +102,21 @@ public class AddressServiceImpl implements AddressService {
 
         Address updatedAddress = addressRepository.save(existingAddress); 
 
+        User user = existingAddress.getUser(); 
+
+        user.getAddresses().removeIf(address -> address.getAddressId().equals(addressId)); 
+
+        user.getAddresses().add(updatedAddress); 
+        userRepository.save(user);
+
         return addressMapper.toDto(updatedAddress);
 
     }
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value = "ecommerce::AddressList", allEntries = true),
-            @CacheEvict(value = "ecommerce::AddressById", key = "#addressId")
+            @CacheEvict(value = "ecommerce::addressList", allEntries = true),
+            @CacheEvict(value = "ecommerce::addressById", key = "#addressId")
 
     })
     public AddressDTO deleteAddressById(Long addressId) {
@@ -121,6 +130,14 @@ public class AddressServiceImpl implements AddressService {
             throw new ApiException("you are Not allowed to update this address");
 
         }
+
+        User user = existingAddress.getUser(); 
+
+        user.getAddresses().removeIf(address -> address.getAddressId().equals(addressId)); 
+
+        userRepository.save(user); 
+
+
 
         addressRepository.delete(existingAddress);
 

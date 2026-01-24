@@ -28,7 +28,7 @@ public class CartController {
     private final AuthUtils authUtils;
 
     @PostMapping("/products/{productId}/quantity/{quantity}")
-    public ResponseEntity<CartDTO> postMethodName(@PathVariable Long productId, @PathVariable Integer quantity) {
+    public ResponseEntity<CartDTO> createCart(@PathVariable Long productId, @PathVariable Integer quantity) {
         CartDTO cartDTO = cartService.addProductToCart(productId, quantity);
 
         return new ResponseEntity<CartDTO>(cartDTO, HttpStatus.CREATED);
@@ -36,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<CartDTO>> getMethodName() {
+    public ResponseEntity<List<CartDTO>> getAllCarts() {
         List<CartDTO> cartDTOs = cartService.getAllCarts();
 
         return new ResponseEntity<List<CartDTO>>(cartDTOs, HttpStatus.OK);

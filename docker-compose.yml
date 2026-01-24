@@ -1,4 +1,30 @@
 services:
+
+  ecommerceapi:
+    image: 'ecommerceapi:latest'
+    build:
+      context: .
+    container_name: ecommerceapi
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/ecommercedb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=salman
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATA_REDIS_HOST=update
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_APP_JWTSECRET=thOh6wCuAawZYZGbgFrR6OuYzxFjGPbjcieTz2MiAwnPhoGkbaYBRYvUAt5/8bQGavn738U7ROPoWJYjeijUXQ==
+      - SPRING_APP_JWTEXPIRATIONMs=3000000
+      - SPRING_APP_JWTCOOKIENAME=ecommerceAuthCookie
+      
+
+      
+
+    ports:
+      - "8080:8080"
   postgres:
     image: postgres:17.1-alpine
     environment:

@@ -80,6 +80,8 @@ public class SecurityConfig {
 
 		http.authenticationProvider(authenticationProvider());
 		http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+		http.cors(cors -> {}); 
+		
 
 		return http.build();
 
@@ -132,6 +134,7 @@ public class SecurityConfig {
 	public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository,
 			PasswordEncoder passwordEncoder) {
 		return args -> {
+			System.out.println("Version: new " );
 			Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER).orElseGet(() -> {
 				Role newUserRole = new Role(AppRole.ROLE_USER);
 				return roleRepository.save(newUserRole);

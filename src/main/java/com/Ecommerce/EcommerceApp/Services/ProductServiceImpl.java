@@ -21,6 +21,7 @@ import com.Ecommerce.EcommerceApp.Exceptions.ResourceNotFoundException;
 import com.Ecommerce.EcommerceApp.Interfaces.CartService;
 import com.Ecommerce.EcommerceApp.Interfaces.ProductService;
 import com.Ecommerce.EcommerceApp.Lib.Util;
+import com.Ecommerce.EcommerceApp.Lib.Utils.AuthUtils;
 import com.Ecommerce.EcommerceApp.Mappers.CartMapper;
 import com.Ecommerce.EcommerceApp.Mappers.ProductMapper;
 import com.Ecommerce.EcommerceApp.Models.Cart;
@@ -31,6 +32,7 @@ import com.Ecommerce.EcommerceApp.Repositories.ICategoryRepository;
 import com.Ecommerce.EcommerceApp.Repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Implementation of the ProductService interface for managing product
@@ -41,7 +43,10 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
+
+    private final AuthUtils authUtils;
 
 	private final ProductRepository productRepository;
 
@@ -54,6 +59,8 @@ public class ProductServiceImpl implements ProductService {
 	private final CartRepository cartRepository;
 
 	private final CartMapper cartMapper;
+
+   
 
 	/**
 	 * Retrieves a paginated and sorted list of products.
@@ -115,6 +122,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@CacheEvict(value = "ecommerce::productList", allEntries = true)
 	public ProductDto saveProduct(ProductDto productDto, Long categoryId) {
+		log.info("Save Product Called....................");
+		
 		Product product = productMapper.toEntity(productDto);
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
@@ -132,12 +141,14 @@ public class ProductServiceImpl implements ProductService {
 
 		if (!isProductExist) {
 			product.setCategory(category);
-			product.setImageUrl("something.png");
+			product.setUser(authUtils.loggedInUser()); 
+			// product.setImageUrl("something.png");
 
 			Double discount = product.getDiscount() != null ? product.getDiscount() : 0.0;
 
 			Double specialPrice = product.getPrice() - ((discount * 0.01) * product.getPrice());
 			product.setSpecialPrice(specialPrice);
+		
 
 			Product savedProduct = productRepository.save(product);
 

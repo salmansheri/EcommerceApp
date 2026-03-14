@@ -134,7 +134,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setRoles(roles);
 		userRepository.save(user);
 
-		return new MessageResponseDTO("Signed Up Successfully!");
+		return new MessageResponseDTO(true,"Signed Up Successfully!");
 
 	}
 

@@ -26,7 +26,8 @@ import lombok.RequiredArgsConstructor;
 /**
  * Rest Controller for managing Product
  *
- * Providers endpoints for - Public product browsing and search - Admin Product creation,
+ * Providers endpoints for - Public product browsing and search - Admin Product
+ * creation,
  * update, and deletion
  *
  * All business logic is delegation to {@link ProductService}
@@ -42,12 +43,10 @@ public class ProductController {
 
 	@GetMapping("/public")
 	public ResponseEntity<ProductResponseDto> getProducts(
-			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER,
-					required = false) Integer pageNumber,
+			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
 			@RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
-			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR,
-					required = false) String sortOrder) {
+			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder) {
 		ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
 
 		return new ResponseEntity<>(productDtoList, HttpStatus.OK);
@@ -64,12 +63,10 @@ public class ProductController {
 
 	@GetMapping("/public/categories/{categoryId}")
 	public ResponseEntity<ProductResponseDto> getProductsByCategory(@PathVariable Long categoryId,
-			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER,
-					required = false) Integer pageNumber,
+			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
 			@RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
-			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR,
-					required = false) String sortOrder
+			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
 
 	) {
 		ProductResponseDto productResponse = productService.getProductsByCategory(categoryId, pageNumber, pageSize,
@@ -81,12 +78,10 @@ public class ProductController {
 
 	@GetMapping("/public/search")
 	public ResponseEntity<ProductResponseDto> getProductsByKeyword(@RequestParam String keyword,
-			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER,
-					required = false) Integer pageNumber,
+			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
 			@RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
-			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR,
-					required = false) String sortOrder
+			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder
 
 	) {
 		ProductResponseDto productResponse = productService.getProductsByKeyword(keyword, pageNumber, pageSize, sortBy,

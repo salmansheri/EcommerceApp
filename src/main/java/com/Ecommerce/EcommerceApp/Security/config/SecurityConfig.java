@@ -64,7 +64,11 @@ public class SecurityConfig {
 
 			.requestMatchers("/api/v1/admin/**")
 			.permitAll()
+			.requestMatchers("/swagger-ui/**")
+			.permitAll()
 			.requestMatchers("/images/**")
+			.permitAll()
+			.requestMatchers("/swagger-ui/index.html")
 			.permitAll()
 			.anyRequest()
 			.authenticated())

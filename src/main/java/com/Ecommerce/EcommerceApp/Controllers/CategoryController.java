@@ -17,6 +17,11 @@ import com.Ecommerce.EcommerceApp.Dtos.CategoryResponseDto;
 import com.Ecommerce.EcommerceApp.Interfaces.ICategoryService;
 import com.Ecommerce.EcommerceApp.Lib.AppConstants;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
@@ -29,6 +34,7 @@ public class CategoryController {
 		this.categoryService = categoryService;
 	}
 
+	@Tag(name = "Category Apis")
 	@GetMapping("/public/categories")
 	public ResponseEntity<CategoryResponseDto> getAllCategories(
 			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER,
@@ -46,7 +52,15 @@ public class CategoryController {
 		return new ResponseEntity<>(categoryResponseDto, HttpStatus.OK);
 	}
 
+
+		@Tag(name = "Category Apis")
+		@Operation(summary = "Create category", description = "Api to Create a new category" )
 	@PostMapping("/public/categories")
+	@ApiResponses({
+		@ApiResponse(responseCode = "201", description = "Category Created Successfully"),
+		@ApiResponse(responseCode = "400", description = "Invalid Input", content = @Content),
+		@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
+	})
 	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto) {
 		CategoryDto createdCategoryDto = categoryService.createCategory(categoryDto);
 		return new ResponseEntity<>(createdCategoryDto, HttpStatus.CREATED);

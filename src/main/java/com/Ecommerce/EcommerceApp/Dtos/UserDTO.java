@@ -26,10 +26,10 @@ public class UserDTO {
 
 	private String password;
 
-	private Set<Role> roles = new HashSet<>();
+	private Set<RoleDto> roles = new HashSet<>();
 
-	private List<Product> products;
+	private List<ProductDto> products;
 
-	private List<Address> addresses = new ArrayList<>();
+	private List<AddressDTO> addresses = new ArrayList<>();
 
 }

@@ -9,7 +9,7 @@ import com.Ecommerce.EcommerceApp.Dtos.ProductResponseDto;
 
 public interface ProductService {
 
-	ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
+	ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder, String keyword, String category);
 
 	ProductDto getProduct(Long id);
 

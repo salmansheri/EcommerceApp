@@ -31,7 +31,6 @@ public class ProductDto implements Serializable {
 
 	private Double discount;
 
-	private User user;
 
 	// private Category category;
 

@@ -70,6 +70,7 @@ public class SecurityConfig {
 			.permitAll()
 			.requestMatchers("/swagger-ui/index.html")
 			.permitAll()
+
 			.anyRequest()
 			.authenticated())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

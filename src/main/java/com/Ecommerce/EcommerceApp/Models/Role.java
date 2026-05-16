@@ -13,12 +13,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

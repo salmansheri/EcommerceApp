@@ -43,18 +43,22 @@ public class ProductController {
 
 	@GetMapping("/public")
 	public ResponseEntity<ProductResponseDto> getProducts(
+			@RequestParam(name = "keyword", required = false) String keyword,
+			@RequestParam(name = "category", required = false) String category,
+
+
 			@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
 			@RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_PRODUCT_BY, required = false) String sortBy,
 			@RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_PRODUCTS_DIR, required = false) String sortOrder) {
-		ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
+		ProductResponseDto productDtoList = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder, keyword, category);
 
 		return new ResponseEntity<>(productDtoList, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/public/{id}")
-	public ResponseEntity<ProductDto> getProducts(@PathVariable Long id) {
+	public ResponseEntity<ProductDto> getProduct(@PathVariable Long id) {
 		ProductDto productDto = productService.getProduct(id);
 
 		return new ResponseEntity<>(productDto, HttpStatus.OK);

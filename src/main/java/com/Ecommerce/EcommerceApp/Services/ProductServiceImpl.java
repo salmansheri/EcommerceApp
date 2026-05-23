@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ApiException if no products are found
 	 */
 	@Override
-	@Cacheable(value = "ecommerce::productList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}", unless = "#result.data.size() == 0")
+	@Cacheable(value = "ecommerce::productList", key = "{#pageNumber, #pageSize, #sortBy, #sortOrder, #keyword, #category}", unless = "#result.data.size() == 0")
 	public ProductResponseDto getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder, String keyword, String category) {
 		Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
 				: Sort.by(sortBy).descending();
@@ -235,7 +235,7 @@ public class ProductServiceImpl implements ProductService {
 	 * @throws ResourceNotFoundException if the product is not found
 	 */
 	@Override
-	// @CacheEvict(value = "ecommerce::productById", key = "#id")
+	 @CacheEvict(value = "ecommerce::productById", key = "#id")
 	@Caching(evict = { @CacheEvict(value = "ecommerce::productById", key = "#id"),
 			@CacheEvict(value = "ecommerce::productList", allEntries = true),
 			@CacheEvict(value = "ecommerce::productListByCategory", allEntries = true),
@@ -283,11 +283,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	// @Cacheable(
-	// value = "ecommerce::productList",
-	// key = "{#pageNumber, #pageSize, #sortBy, #sortOrder}",
-	// unless = "#result.data.size() == 0"
-	// )
+	 @Cacheable(
+	 value = "ecommerce::productList",
+	 key = "{#keyword,#pageNumber, #pageSize, #sortBy, #sortOrder}",
+	 unless = "#result.data.size() == 0"
+	 )
 	public ProductResponseDto getProductsByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
 			String sortOrder) {
 
